@@ -17,3 +17,6 @@
   color: black;
   cursor: pointer;
 }
+.header__account:hover {
+  opacity: 0.8;
+}

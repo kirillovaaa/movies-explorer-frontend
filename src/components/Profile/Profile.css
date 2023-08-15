@@ -1,0 +1,60 @@
+.profile {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.profile__welcome {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.2;
+  margin: 74px 0 123px 0;
+  text-align: center;
+}
+.profile__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 220px;
+  font-size: 14px;
+  line-height: 1.2;
+}
+.profile__name {
+  text-align: center;
+  padding: 34px 0;
+  border-bottom: 1px solid #e8e8e8;
+}
+.profile__email {
+  text-align: center;
+}
+
+.profile__buttons {
+  display: flex;
+  flex-direction: column;
+}
+.profile__edit {
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: black;
+}
+.profile__logout {
+  margin-top: 16px;
+  line-height: 1.2;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ee3465;
+  text-decoration: none;
+  background: none;
+  border: none;
+  text-align: center;
+}
+.profile__logout:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+.profile__edit:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}

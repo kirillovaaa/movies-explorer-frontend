@@ -47,10 +47,10 @@ const Login = ({ onSubmit }) => {
           </div>
         </div>
 
+        <button className="signup__registration-button" type="submit">
+          Войти
+        </button>
         <div className="signup__footer">
-          <button className="signup__registration-button" type="submit">
-            Войти
-          </button>
           <p className="signup__text">Ещё не зарегистрированы?</p>
 
           <Link to="/sign-in" className="signup__login-button" type="button">
