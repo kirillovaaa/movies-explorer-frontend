@@ -1,25 +1,31 @@
 import React from "react";
 import "./Main.css";
+// глобальные компоненты
 import Header from "../Header/Header";
-import AboutProject from "./AboutProject/AboutProject";
+import Footer from "../Footer/Footer";
+// локальные компоненты
 import Promo from "./Promo/Promo";
-import Portfolio from "./Portfolio/Portfolio";
+import NavTab from "./NavTab/NavTab";
+import AboutProject from "./AboutProject/AboutProject";
 import Techs from "./Techs/Techs";
 import AboutMe from "./AboutMe/AboutMe";
-import Footer from "../Footer/Footer";
+import Portfolio from "./Portfolio/Portfolio";
 
-function Main() {
+const Main = () => {
   return (
-    <main className="main">
+    <main>
       <Header />
       <Promo />
+
+      <NavTab />
       <AboutProject />
       <Techs />
       <AboutMe />
       <Portfolio />
+
       <Footer />
     </main>
   );
-}
+};
 
 export default Main;

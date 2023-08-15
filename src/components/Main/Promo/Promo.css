@@ -1,0 +1,25 @@
+.promo {
+  display: flex;
+  height: 524px;
+  align-items: center;
+  padding: 0 70px 0 70px;
+  background-color: #465dff;
+  flex-direction: column;
+  position: relative;
+}
+
+.promo__title {
+  margin-top: 184px;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 1.2;
+  max-width: 730px;
+  color: white;
+  text-align: center;
+}
+
+.promo__image {
+  margin-top: 82px;
+  margin-bottom: 122px;
+  position: absolute;
+}

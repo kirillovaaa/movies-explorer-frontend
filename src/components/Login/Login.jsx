@@ -15,7 +15,7 @@ const Login = ({ onSubmit }) => {
   };
 
   return (
-    <>
+    <main class>
       <form className="signup" onSubmit={handleSubmit}>
         <div className="signup__registration">
           <h1 className="signup__heading">Рады видеть!</h1>
@@ -58,7 +58,7 @@ const Login = ({ onSubmit }) => {
           </Link>
         </div>
       </form>
-    </>
+    </main>
   );
 };
 

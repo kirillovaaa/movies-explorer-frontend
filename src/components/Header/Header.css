@@ -1,3 +1,19 @@
-.promo__header {
-  background-color: black;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 70px;
+}
+
+.header__account {
+  width: 100px;
+  height: 32px;
+  background-color: #f9f9f9;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: black;
+  cursor: pointer;
 }
