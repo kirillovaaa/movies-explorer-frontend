@@ -1,3 +1,30 @@
+.header__sidenav {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.header__sidenav_active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.header__sidenav-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 520px;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
 .header {
   position: relative;
   display: flex;
@@ -8,10 +35,6 @@
 
 .header .header__profile {
   display: flex;
-}
-
-.header__desktop-only {
-  display: none;
 }
 
 .header_blue {
@@ -29,6 +52,29 @@
 }
 .header__links_desktop {
   display: none;
+}
+.header__links_sidenav {
+  display: flex;
+  height: 100%;
+  padding: 144px 0 46px;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.header__links_sidenav > .header__link {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 500;
+  padding: 4px 0;
+}
+
+.header__links_sidenav > .header__link_active {
+  border-bottom: solid 2px #000000;
+}
+
+.header__links_sidenav > .header__button_pill {
+  margin-top: auto;
 }
 
 .header__link {
@@ -118,31 +164,6 @@
   display: inline-flex;
 }
 
-.header__sidenav {
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: flex-end;
-  visibility: hidden;
-  opacity: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-}
-.header__sidenav_active {
-  visibility: visible;
-  opacity: 1;
-}
-
-.header__sidenav-main {
-  background-color: #ffffff;
-  width: 100%;
-  height: 100vh;
-  max-width: 520px;
-}
-
 @media screen and (min-width: 768px) {
   .header__logo {
     left: 30px;
@@ -156,6 +177,10 @@
     font-size: 12px;
     padding: 8px 20px;
   }
+
+  .header__links_sidenav {
+    padding: 160px 0 90px;
+  }
 }
 
 @media screen and (min-width: 1280px) {
@@ -168,7 +193,7 @@
   }
 
   .header__button_desktop {
-    display: inherit;
+    display: inline-flex;
   }
 
   .header__icon-button_mobile {

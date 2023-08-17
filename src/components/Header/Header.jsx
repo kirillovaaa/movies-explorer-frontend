@@ -5,13 +5,14 @@ import menuIcon from "../../images/menu.svg";
 import crossIcon from "../../images/cross.svg";
 import "./Header.css";
 
-const HeaderLink = ({ to, children }) => {
+const HeaderLink = ({ to, children, onClick }) => {
   return (
     <NavLink
       to={to}
       className={({ isActive }) =>
         `header__link ${isActive ? "header__link_active" : ""}`
       }
+      onClick={onClick}
     >
       {children}
     </NavLink>
@@ -30,13 +31,14 @@ const Header = ({ isLoggedIn }) => {
 
   const handleClickAccount = () => {
     navigate("/profile");
+    closeMenu();
   };
 
-  const handleOpenMenu = () => {
+  const openMenu = () => {
     setIsMenuOpen(true);
   };
 
-  const handleCloseMenu = () => {
+  const closeMenu = () => {
     setIsMenuOpen(false);
   };
 
@@ -53,29 +55,6 @@ const Header = ({ isLoggedIn }) => {
 
   return (
     <>
-      <aside
-        className={
-          isMenuOpen
-            ? "header__sidenav header__sidenav_active"
-            : "header__sidenav"
-        }
-        onClick={handleCloseMenu}
-      >
-        <div className={"header__sidenav"}>
-          <div
-            className="header__links header__links_sidenav"
-            onClick={handleCaptureSidenav}
-          >
-            <button className="header__icon-button" onClick={handleCloseMenu}>
-              <img src={crossIcon} alt="Закрыть" />
-            </button>
-            <HeaderLink to="/">Главная</HeaderLink>
-            <HeaderLink to="/movies">Фильмы</HeaderLink>
-            <HeaderLink to="/saved-movies">Сохраненные фильмы</HeaderLink>
-          </div>
-        </div>
-      </aside>
-
       <header className={`header ${matchMain ? "header_blue" : ""}`}>
         {/* впоследствии заменить на isLoggedIn */}
         <Link to="/">
@@ -103,7 +82,7 @@ const Header = ({ isLoggedIn }) => {
               <button
                 className="header__icon-button header__icon-button_mobile"
                 src={menuIcon}
-                onClick={handleOpenMenu}
+                onClick={openMenu}
               >
                 <img src={menuIcon} alt="Меню" />
               </button>
@@ -124,6 +103,42 @@ const Header = ({ isLoggedIn }) => {
           )}
         </div>
       </header>
+
+      <div
+        className="header__sidenav"
+        style={{ visibility: isMenuOpen ? "visible" : "hidden" }}
+        onClick={closeMenu}
+      >
+        <div className="header__sidenav-main">
+          <div
+            className="header__links header__links_sidenav"
+            onClick={handleCaptureSidenav}
+          >
+            <button className="header__icon-button" onClick={closeMenu}>
+              <img src={crossIcon} alt="Закрыть" />
+            </button>
+
+            <HeaderLink to="/" onClick={closeMenu}>
+              Главная
+            </HeaderLink>
+
+            <HeaderLink to="/movies" onClick={closeMenu}>
+              Фильмы
+            </HeaderLink>
+
+            <HeaderLink to="/saved-movies" onClick={closeMenu}>
+              Сохраненные фильмы
+            </HeaderLink>
+
+            <button
+              className="header__button header__button_pill"
+              onClick={handleClickAccount}
+            >
+              Аккаунт
+            </button>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
