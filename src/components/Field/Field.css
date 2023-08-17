@@ -1,0 +1,30 @@
+.auth__input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.auth__input {
+  padding: 15px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  border-radius: 8px;
+  background-color: #f4f4f4;
+  border: none;
+}
+.auth__input_error {
+  color: #ee3465;
+}
+.auth__input:focus {
+  outline: none;
+}
+
+.auth__input-label {
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.auth__input-label_error {
+  color: #ee3465;
+}

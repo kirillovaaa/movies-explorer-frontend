@@ -1,61 +1,71 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
+import Field from "../Field/Field";
+import logo from "../../images/logo.svg";
 
 const Login = ({ onSubmit }) => {
-  const email = useRef();
-  const password = useRef();
+  const [email, setEmail] = useState("pochta@yandex.ru");
+  const [password, setPassword] = useState("");
+
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // отменяем стандартный переход на адрес формы
-    onSubmit({
-      email: email.current.value,
-      password: password.current.value,
-    });
+    // отменяем стандартный переход на адрес формы
+    e.preventDefault();
+    // вызываем обработчик нажатия на кнопку "Войти"
+    onSubmit({ email, password });
   };
 
   return (
-    <main class>
-      <form className="signup" onSubmit={handleSubmit}>
-        <div className="signup__registration">
-          <h1 className="signup__heading">Рады видеть!</h1>
-
-          <div className="signup__input-wrapper">
-            <input
-              ref={email}
-              className="signup__input"
-              type="email"
-              autoComplete="email"
-              name="email"
-              placeholder="Email"
-              required={true}
-            />
+    <main className="auth">
+      <form className="auth__form" onSubmit={handleSubmit}>
+        <div className="auth__top">
+          <div className="auth__header">
+            <img src={logo} className="auth__logo" alt="Логотип" />
+            <h1 className="auth__title">Рады видеть!</h1>
           </div>
 
-          <div className="signup__input-wrapper">
-            <input
-              ref={password}
-              className="signup__input"
+          <div className="auth__fields">
+            <Field
+              value={email}
+              onChange={handleChangeEmail}
+              label="E-mail"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required={true}
+            />
+
+            <Field
+              value={password}
+              onChange={handleChangePassword}
+              label="Пароль"
+              name="password"
               type="password"
               autoComplete="current-password"
-              name="password"
-              placeholder="Пароль"
-              minLength="2"
-              maxLength="30"
               required={true}
             />
           </div>
         </div>
 
-        <button className="signup__registration-button" type="submit">
-          Войти
-        </button>
-        <div className="signup__footer">
-          <p className="signup__text">Ещё не зарегистрированы?</p>
+        <div className="auth__footer">
+          <button className="auth__button" type="submit">
+            Войти
+          </button>
 
-          <Link to="/sign-in" className="signup__login-button" type="button">
-            Регистрация
-          </Link>
+          <span className="auth__question">
+            Ещё не зарегистрированы?{" "}
+            <Link to="/signup" className="auth__secondary-link">
+              Регистрация
+            </Link>
+          </span>
         </div>
       </form>
     </main>

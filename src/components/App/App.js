@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+// компоненты
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 // роуты
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Main from "../Main/Main";
@@ -10,27 +13,15 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Page404 from "../Page404/Page404";
 
-// TODO:
-// * О проекте
-// * Фильмы
-// * Сохраненные фильмы
-// * Профиль
-// * Регистрация
-// * Вход
-
 const App = () => {
   const [isLoggedIn] = useState(true);
 
   return (
     <>
+      <Header isLoggedIn={isLoggedIn} />
+
       <Routes>
-        <Route
-          index={true}
-          path="/"
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn} element={<Main />} />
-          }
-        />
+        <Route path="/" element={<Main />} />
 
         <Route
           path="/movies"
@@ -53,12 +44,14 @@ const App = () => {
           }
         />
 
-        <Route path="/signin" element={Login} />
+        <Route path="/signin" element={<Login />} />
 
-        <Route path="/signup" element={Register} />
+        <Route path="/signup" element={<Register />} />
 
         <Route path="*" element={<Page404 />} />
       </Routes>
+
+      <Footer />
     </>
   );
 };

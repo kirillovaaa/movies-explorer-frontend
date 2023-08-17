@@ -1,15 +1,18 @@
 import React from "react";
 import "./SavedMovies.css";
 // глобальные компоненты
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
+// датасет
+import { moviesList } from "../Movies/Movies";
 
 const SavedMovies = () => {
+  const savedMoviesList = moviesList.filter((m) => m.isSaved === true);
+
   return (
-    <main>
-      <Header />
-      <h1>Saved Movies</h1>;
-      <Footer />
+    <main className="movies movies_saved">
+      <SearchForm />
+      <MoviesCardList movies={savedMoviesList} allowsRemove={true} />
     </main>
   );
 };

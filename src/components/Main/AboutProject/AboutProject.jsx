@@ -1,36 +1,47 @@
 import React from "react";
 import "./AboutProject.css";
 
-function AboutProject() {
+const AboutProject = () => {
   return (
-    <section className="aboutproject" id="about-project">
+    <section className="about-project">
       <h3 className="section-header">О проекте</h3>
-      <ul className="table">
-        <li className="table__cell">
-          <h4 className="table__heading">Дипломный проект включал 5 этапов</h4>
-          <p className="table__text">
+
+      <ul className="about-project__table">
+        <li className="about-project__table-cell">
+          <h4 className="about-project__table-heading">
+            Дипломный проект включал 5 этапов
+          </h4>
+
+          <p className="about-project__table-text">
             Составление плана, работу над бэкендом, вёрстку, добавление
             функциональности и финальные доработки.
           </p>
         </li>
 
-        <li className="table__cell">
-          <h4 className="table__heading">
+        <li className="about-project__table-cell">
+          <h4 className="about-project__table-heading">
             На выполнение диплома ушло 5 недель
           </h4>
-          <p className="table__text">
+
+          <p className="about-project__table-text">
             У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было
             соблюдать, чтобы успешно защититься.
           </p>
         </li>
       </ul>
-      <div className="plan">
-        <p className="plan__text">1 неделя</p>
-        <p className="plan__text">4 недели</p>
-        <p className="plan__text">Back-end</p>
-        <p className="plan__text">Front-end</p>
+
+      <div className="about-project__plans">
+        <div className="about-project__plan about-project__plan_current">
+          <span className="about-project__plan-item">1 неделя</span>
+          <span className="about-project__plan-item">4 недели</span>
+        </div>
+
+        <div className="about-project__plan">
+          <span className="about-project__plan-item">Back-end</span>
+          <span className="about-project__plan-item">Front-end</span>
+        </div>
       </div>
     </section>
   );
-}
+};
 export default AboutProject;

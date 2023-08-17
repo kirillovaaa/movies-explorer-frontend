@@ -1,76 +1,94 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+// все нужные нам стили уже есть в другом компоненте -> Signin
+// здесь только перегрузка для маргина нижнего блока
 import "./Register.css";
 import logo from "../../images/logo.svg";
+import Field from "../Field/Field";
 
 const Register = ({ onSubmit }) => {
-  const email = useRef();
-  const password = useRef();
+  const [name, setName] = useState("Александра");
+  const [email, setEmail] = useState("pochta@yandex.ru");
+  const [password, setPassword] = useState("••••••••••••••");
+
+  const handleChangeName = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // отменяем стандартный переход на адрес формы
-    onSubmit({
-      email: email.current.value,
-      password: password.current.value,
-    });
+    // отменяем стандартный переход на адрес формы
+    e.preventDefault();
+    // вызываем обработчик нажатия на кнопку "Войти"
+    onSubmit({ email, password });
   };
 
   return (
-    <>
-      <form className="signup" onSubmit={handleSubmit}>
-        <div className="signup__registration">
-          <img src={logo} className="signup__logo" alt="movies-logo" />
+    <main className="auth">
+      <form className="auth__form" onSubmit={handleSubmit}>
+        <div className="auth__top auth__top_signup">
+          <div className="auth__header">
+            <img src={logo} className="auth__logo" alt="Логотип" />
+            <h1 className="auth__title">Добро пожаловать!</h1>
+          </div>
 
-          <h1 className="signup__heading">Добро пожаловать!</h1>
-
-          <div className="signup__input-wrapper">
-            <input
-              className="signup__input"
+          <div className="auth__fields">
+            <Field
+              label="Имя"
+              value={name}
+              onChange={handleChangeName}
               type="name"
-              autoComplete="Имя"
-              name="Имя"
-              placeholder="Имя"
+              autoComplete="name"
+              name="name"
               required={true}
             />
-          </div>
-          <div className="signup__input-wrapper">
-            <input
-              ref={email}
-              className="signup__input"
+
+            <Field
+              label="E-mail"
+              value={email}
+              onChange={handleChangeEmail}
               type="email"
               autoComplete="email"
               name="email"
-              placeholder="Email"
               required={true}
             />
-          </div>
 
-          <div className="signup__input-wrapper">
-            <input
-              ref={password}
-              className="signup__input"
+            <Field
+              label="Пароль"
+              value={password}
+              onChange={handleChangePassword}
               type="password"
               autoComplete="new-password"
               name="password"
-              placeholder="Пароль"
               minLength="2"
               maxLength="30"
+              errorMessage="Что-то пошло не так..."
               required={true}
             />
           </div>
         </div>
 
-        <button className="signup__registration-button" type="submit">
-          Зарегистрироваться
-        </button>
-        <div className="signup__footer">
-          <p className="signup__text">Уже зарегистрированы?</p>
-          <Link to="/sign-in" className="signup__login-button" type="button">
-            Войти
-          </Link>
+        <div className="auth__footer">
+          <button className="auth__button" type="submit">
+            Зарегистрироваться
+          </button>
+
+          <span className="auth__question">
+            Уже зарегистрированы?{" "}
+            <Link to="/signin" className="auth__secondary-link" type="button">
+              Войти
+            </Link>
+          </span>
         </div>
       </form>
-    </>
+    </main>
   );
 };
 

@@ -1,0 +1,16 @@
+.movies__card-list {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  row-gap: 32px;
+  column-gap: 20px;
+}
+
+.movies__more-button {
+  font-size: 12px;
+  border-radius: 6px;
+  height: 36px;
+  margin-top: 80px;
+  background-color: #f9f9f9;
+  border: none;
+}

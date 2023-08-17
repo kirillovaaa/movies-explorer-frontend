@@ -1,22 +1,177 @@
 .header {
+  position: relative;
   display: flex;
-  justify-content: space-between;
+  height: 74px;
+  justify-content: center;
   align-items: center;
-  padding: 18px 70px;
+}
+
+.header .header__profile {
+  display: flex;
+}
+
+.header__desktop-only {
+  display: none;
+}
+
+.header_blue {
+  background-color: #465dff;
+}
+
+.header__logo {
+  position: absolute;
+  top: 18px;
+  left: 14px;
+}
+
+.header__links {
+  gap: 16px;
+}
+.header__links_desktop {
+  display: none;
+}
+
+.header__link {
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+}
+
+.header__link:visited {
+  color: inherit;
+}
+
+.header__link_active {
+  font-weight: 500;
+}
+
+.header__actions {
+  position: absolute;
+  top: 0;
+  right: 14px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header__auth {
+  display: block;
 }
 
 .header__account {
-  width: 100px;
-  height: 32px;
+  font-weight: 500;
+  color: black;
   background-color: #f9f9f9;
   border: none;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.2;
-  color: black;
-  cursor: pointer;
+  transition: opacity 0.1s ease-in-out;
 }
-.header__account:hover {
+
+.header__button {
+  color: #ffffff;
+  background-color: transparent;
+  font-size: 10px;
+  padding: 5px 12px;
+  line-height: 16px;
+  font-weight: 500;
+  border-radius: 3px;
+  border: none;
+  transition: opacity 0.1s ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+}
+.header__button:hover {
   opacity: 0.8;
+}
+.header__button_pill {
+  font-size: 14px;
+  border-radius: 16px;
+  background-color: #f9f9f9;
+  color: #000000;
+}
+.header__button_auth {
+  font-size: 10px;
+  padding: 5px 12px;
+}
+.header__button_desktop {
+  display: none;
+}
+.header__button_primary {
+  background-color: #2be080;
+  color: #000000;
+}
+
+.header__icon-button {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+}
+.header__icon-button_mobile {
+  display: inline-flex;
+}
+
+.header__sidenav {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  visibility: hidden;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.header__sidenav_active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.header__sidenav-main {
+  background-color: #ffffff;
+  width: 100%;
+  height: 100vh;
+  max-width: 520px;
+}
+
+@media screen and (min-width: 768px) {
+  .header__logo {
+    left: 30px;
+  }
+
+  .header__actions {
+    right: 30px;
+  }
+
+  .header__button_auth {
+    font-size: 12px;
+    padding: 8px 20px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .header__logo {
+    left: 70px;
+  }
+
+  .header__actions {
+    right: 70px;
+  }
+
+  .header__button_desktop {
+    display: inherit;
+  }
+
+  .header__icon-button_mobile {
+    display: none;
+  }
 }

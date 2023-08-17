@@ -1,26 +1,45 @@
 import React from "react";
 import "./Profile.css";
-import { Link } from "react-router-dom";
-// глобальные компоненты
-import Header from "../Header/Header";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-  return (
-    <main>
-      <Header />
+  const navigate = useNavigate();
 
-      <h2 className="profile__welcome">Привет, Александра!</h2>
-      <div className="profile__container">
-        <p className="profile__name">Имя</p>
-        <p className="profile__name">Александра</p>
-        <p className="profile__email">E-mail</p>
-        <p className="profile__email">kiri2lova@gmail.com</p>
-      </div>
-      <div className="profile__buttons">
-        <button className="profile__edit">Редактировать</button>
-        <Link className="profile__logout" to="/signin">
-          Выйти из аккаунта
-        </Link>
+  const handleClickLogout = () => {
+    navigate("/signin");
+  };
+
+  return (
+    <main className="profile">
+      <div className="profile__form">
+        <div className="profile__top">
+          <h2 className="profile__welcome">Привет, Александра!</h2>
+
+          <div className="profile__container">
+            <div className="profile__field">
+              <span>Имя</span>
+              <span>Александра</span>
+            </div>
+
+            <div className="profile__field-divider"></div>
+
+            <div className="profile__field">
+              <span>E-mail</span>
+              <span>kiri2lova@gmail.com</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="profile__buttons">
+          <button className="profile__button">Редактировать</button>
+
+          <button
+            className="profile__button profile__button_destructive"
+            onClick={handleClickLogout}
+          >
+            Выйти из аккаунта
+          </button>
+        </div>
       </div>
     </main>
   );

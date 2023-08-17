@@ -1,58 +1,124 @@
-.aboutme {
-  padding: 0 70px 0 70px;
+.about-me {
+  padding: 70px 18px;
 }
 
-.aboutme__wrapper {
+.about-me__wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 
-.aboutme__wrapper-text {
+.about-me__wrapper-text {
   display: flex;
   flex-direction: column;
 }
 
-.aboutme__title {
+.about-me__title {
+  margin: 40px 0 20px;
   font-weight: 400;
-  font-size: 50px;
-  line-height: 1.2;
-  margin: 66px 0 18px;
+  font-size: 30px;
+  line-height: 36px;
+  letter-spacing: -1.2px;
 }
 
-.aboutme__subtitle {
+.about-me__subtitle {
   font-weight: 500;
-  font-size: 18px;
-  line-height: 1.2;
+  font-size: 11px;
+  line-height: 16px;
+  margin: 0 0 20px;
+}
+
+.about-me__description {
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 400;
+  max-width: 600px;
   margin: 0;
 }
 
-.aboutme__discription {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.6;
-  max-width: 600px;
-  margin: 26px 0 0;
-}
-
-.aboutme__git-link {
-  margin: 100px 0 100px;
+.about-me__git-link {
+  margin: 40px 0 70px;
   font-weight: 500;
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 17px;
   text-decoration-line: none;
   color: black;
   max-width: 46px;
   text-align: center;
 }
+.about-me__git-link:hover {
+  opacity: 0.7;
+}
 
-.aboutme__avatar {
+.about-me__avatar {
   display: flex;
   max-width: 270px;
   height: 100%;
   object-fit: contain;
   border-radius: 10px;
   margin-top: 66px;
+  order: -1;
 }
-.aboutme__git-link:hover {
-  opacity: 0.7;
+
+@media screen and (min-width: 768px) {
+  .about-me {
+    padding: 90px 50px;
+  }
+
+  .about-me__wrapper {
+    flex-direction: row;
+    gap: 50px;
+  }
+
+  .about-me__avatar {
+    order: 1;
+  }
+
+  .about-me__title {
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: -1.6px;
+    margin-top: 66px;
+  }
+
+  .about-me__subtitle {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__description {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__git-link {
+    margin: 90px 0 90px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .about-me {
+    padding: 110px 70px;
+  }
+
+  .about-me__title {
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -2px;
+    margin-top: 80px;
+  }
+
+  .about-me__subtitle {
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .about-me__description {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .about-me__git-link {
+    margin: 100px 0 100px;
+  }
 }
