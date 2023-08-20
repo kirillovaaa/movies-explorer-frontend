@@ -52,9 +52,10 @@
 
 .about-me__avatar {
   display: flex;
-  max-width: 270px;
+  aspect-ratio: 1/1.2;
+  width: 270px;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 10px;
   margin-top: 66px;
   order: -1;
@@ -105,7 +106,7 @@
     font-size: 50px;
     line-height: 58px;
     letter-spacing: -2px;
-    margin-top: 80px;
+    margin-top: 66px;
   }
 
   .about-me__subtitle {
@@ -119,6 +120,6 @@
   }
 
   .about-me__git-link {
-    margin-top: 100px;
+    margin-top: 80px;
   }
 }

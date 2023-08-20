@@ -2,6 +2,7 @@
   background-color: #fdfdfd;
   border-radius: 10px;
   box-shadow: 0 16px 24px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
 .movies__card-image {
@@ -48,6 +49,10 @@
   height: 16px;
   border: none;
   background: transparent;
+  cursor: pointer;
+}
+.movies__card-delete-button:hover {
+  opacity: 0.7;
 }
 
 .movies__card-indicator {
@@ -57,6 +62,10 @@
   background-color: #f9f9f9;
   border: solid 2px #ffffff;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.09);
+  cursor: pointer;
+}
+.movies__card-indicator:hover {
+  opacity: 0.7;
 }
 
 .movies__card-indicator_active {

@@ -9,7 +9,7 @@
   line-height: 20px;
   font-weight: 400;
   color: #a0a0a0;
-  margin: 0 0 40px 0;
+  margin: 0 0 70px 0;
 }
 
 .portfolio__links {
@@ -32,7 +32,7 @@
 }
 
 .portfolio__icon {
-  max-width: 29px;
+  font-size: 30px;
 }
 .portfolio__link:nth-child(2) {
   margin-top: 20px;

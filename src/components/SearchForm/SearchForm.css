@@ -34,14 +34,22 @@
   height: 34px;
   border-radius: 48px;
   margin: 6px 6px;
+  cursor: pointer;
+}
+.search-form__button-switch:hover {
+  opacity: 0.7;
 }
 .search-form__button-switch {
-  background-image: url(../../images/switch-icon.svg);
+  background-image: url(../../images/switch-on.svg);
   background-color: #fff;
   border: none;
   width: 36px;
   height: 20px;
   position: relative;
+  cursor: pointer;
+}
+.search-form__button-switch:hover {
+  opacity: 0.7;
 }
 
 .search-form__icon-image {

@@ -21,8 +21,8 @@
 
 .promo__image {
   position: absolute;
-  width: 248px;
-  height: 248px;
+  margin-bottom: 122px;
+  margin-top: 82px;
 }
 
 @media screen and (min-width: 768px) {
