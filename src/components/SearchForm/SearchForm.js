@@ -14,7 +14,7 @@ const SearchForm = () => {
           required={true}
         />
 
-        <button className="search-form__button-search">
+        <button type="button" className="search-form__button-search">
           <img
             src={iconSearch}
             className="search-form__icon-image"
@@ -24,7 +24,7 @@ const SearchForm = () => {
       </div>
 
       <div className="search-form__short-wrapper">
-        <button className="search-form__button-switch" type="submit"></button>
+        <button type="button" className="search-form__button-switch"></button>
         <span className="search-form__text">Короткометражки</span>
       </div>
 

@@ -25,7 +25,11 @@ const MoviesCardList = ({
       </div>
 
       {hasMoreMovies && (
-        <button className="movies__more-button" onClick={onClickMore}>
+        <button
+          type="button"
+          className="movies__more-button"
+          onClick={onClickMore}
+        >
           Ещё
         </button>
       )}

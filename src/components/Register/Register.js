@@ -83,13 +83,13 @@ const Register = ({ onSubmit }) => {
         </div>
 
         <div className="auth__footer">
-          <button className="auth__button" type="submit">
+          <button type="submit" className="auth__button">
             Зарегистрироваться
           </button>
 
           <span className="auth__question">
             Уже зарегистрированы?{" "}
-            <Link to="/signin" className="auth__secondary-link" type="button">
+            <Link to="/signin" className="auth__secondary-link">
               Войти
             </Link>
           </span>

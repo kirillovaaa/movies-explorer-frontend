@@ -60,7 +60,7 @@ const Login = ({ onSubmit }) => {
         </div>
 
         <div className="auth__footer">
-          <button className="auth__button" type="submit">
+          <button type="submit" className="auth__button">
             Войти
           </button>
 

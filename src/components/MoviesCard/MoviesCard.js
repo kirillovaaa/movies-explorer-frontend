@@ -18,7 +18,7 @@ const MoviesCard = ({ name, time, imageSrc, hasRemoveButton, isSaved }) => {
         </div>
 
         {hasRemoveButton ? (
-          <button className="movies__card-delete-button">
+          <button type="button" className="movies__card-delete-button">
             <img src={closeIcon} alt="Закрыть" />
           </button>
         ) : (

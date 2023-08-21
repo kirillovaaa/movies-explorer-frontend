@@ -73,14 +73,15 @@ const Header = ({ isLoggedIn }) => {
           {!matchMain ? (
             <>
               <button
+                type="button"
                 className="header__button header__button_pill header__button_desktop"
                 onClick={handleClickAccount}
-                type="button"
               >
                 Аккаунт
               </button>
 
               <button
+                type="button"
                 className="header__icon-button header__icon-button_mobile"
                 src={menuIcon}
                 onClick={openMenu}
@@ -115,7 +116,11 @@ const Header = ({ isLoggedIn }) => {
             className="header__links header__links_sidenav"
             onClick={handleCaptureSidenav}
           >
-            <button className="header__icon-button" onClick={closeMenu}>
+            <button
+              type="button"
+              className="header__icon-button"
+              onClick={closeMenu}
+            >
               <img src={crossIcon} alt="Закрыть" />
             </button>
 
@@ -132,6 +137,7 @@ const Header = ({ isLoggedIn }) => {
             </HeaderLink>
 
             <button
+              type="button"
               className="header__button header__button_pill"
               onClick={handleClickAccount}
             >
