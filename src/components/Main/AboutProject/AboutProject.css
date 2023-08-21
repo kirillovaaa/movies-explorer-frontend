@@ -1,6 +1,6 @@
 .about-project {
   display: flex;
-  padding: 70px 14px;
+  padding: 70px 18px;
   flex-direction: column;
   background: #fafafa;
 }
@@ -9,8 +9,8 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
-  letter-spacing: -0.88px;
-  padding-bottom: 23px;
+  letter-spacing: -0.72px;
+  padding-bottom: 28px;
   border-bottom: 1px solid #000;
   margin: 0;
 }
@@ -18,35 +18,36 @@
 .about-project__table {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
-  margin: 70px 0 110px;
+  gap: 56px;
+  margin: 60px 0;
   padding-left: 0;
 }
 
 .about-project__table-cell {
   flex: 1;
-  min-width: 320px;
+  min-width: 280px;
   list-style-type: none;
 }
 
 .about-project__table-heading {
-  margin: 0 0 26px;
-  font-size: 20px;
-  line-height: 24px;
+  margin: 0 0 16px;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: -0.72px;
   font-weight: 400;
 }
 
 .about-project__table-text {
   margin: 0;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 11px;
+  line-height: 16px;
   font-weight: 400;
 }
 
 .about-project__plans {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
 }
 
 .about-project__plan {
@@ -55,10 +56,17 @@
   line-height: 13px;
   color: #a0a0a0;
 }
+.about-project__plan_current {
+  height: 35px;
+}
+
 .about-project__plan-item {
-  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 .about-project__plan-item:first-child {
+  min-width: 100px;
   flex: 1;
 }
 .about-project__plan-item:last-child {
@@ -66,7 +74,6 @@
 }
 .about-project__plan_current > .about-project__plan-item {
   color: #000000;
-  padding: 9px 0;
   font-weight: 500;
 }
 .about-project__plan_current > .about-project__plan-item:first-child {
@@ -77,14 +84,34 @@
 }
 
 @media screen and (min-width: 768px) {
-  .about-project {
-    padding: 90px 50px;
-  }
-
   .section-header {
     font-size: 22px;
     line-height: 27px;
-    letter-spacing: -0.72px;
+    padding-bottom: 23px;
+    letter-spacing: -0.88px;
+  }
+
+  .about-project__table {
+    margin: 70px 0 90px;
+    gap: 30px;
+  }
+
+  .about-project__table-heading {
+    letter-spacing: -0.8px;
+    margin-bottom: 22px;
+  }
+
+  .about-project__table-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-project__plan-item:first-child {
+    min-width: 140px;
+  }
+
+  .about-project__plans {
+    gap: 14px;
   }
 
   .about-project__plan {
@@ -96,5 +123,19 @@
 @media screen and (min-width: 1280px) {
   .about-project {
     padding: 110px 70px;
+  }
+
+  .about-project__table {
+    margin: 70px 0 110px;
+    gap: 40px;
+  }
+
+  .about-project__table-heading {
+    margin-bottom: 26px;
+  }
+
+  .about-project__table-text {
+    font-size: 14px;
+    line-height: 20px;
   }
 }

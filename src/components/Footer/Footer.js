@@ -20,8 +20,6 @@ const Footer = () => {
       </p>
 
       <div className="footer__info">
-        <span className="footer__copyright">© 2023</span>
-
         <ul className="footer__links">
           <a
             className="footer__link"
@@ -34,6 +32,8 @@ const Footer = () => {
             Github
           </a>
         </ul>
+
+        <span className="footer__copyright">© 2023</span>
       </div>
     </footer>
   );

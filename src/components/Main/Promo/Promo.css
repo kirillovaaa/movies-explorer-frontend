@@ -10,6 +10,7 @@
 }
 
 .promo__title {
+  margin: 0;
   font-weight: 400;
   font-size: 31px;
   line-height: 39px;
@@ -17,16 +18,18 @@
   max-width: 730px;
   color: white;
   text-align: center;
+  transform: translateY(-20px);
 }
 
 .promo__image {
   position: absolute;
-  margin-bottom: 122px;
-  margin-top: 82px;
+  width: 248px;
+  transform: translateY(-20px);
 }
 
 @media screen and (min-width: 768px) {
   .promo {
+    height: 784px;
     padding: 0 30px;
   }
 
@@ -37,6 +40,7 @@
   }
 
   .promo__image {
+    margin-top: 110px;
     width: 320px;
     height: 320px;
   }
