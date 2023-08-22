@@ -28,7 +28,11 @@ const Footer = () => {
           >
             Яндекс.Практикум
           </a>
-          <a className="footer__link" href="https://github.com/kirillovaaa">
+          <a
+            className="footer__link"
+            href="https://github.com/kirillovaaa"
+            target="blank"
+          >
             Github
           </a>
         </ul>
