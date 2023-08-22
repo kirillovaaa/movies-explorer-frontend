@@ -23,12 +23,10 @@ const SearchForm = () => {
         </button>
       </div>
 
-      <div className="search-form__short-wrapper">
+      <div className="search-form__toggle-wrapper">
         <button type="button" className="search-form__button-switch"></button>
-        <span className="search-form__text">Короткометражки</span>
+        <span className="search-form__toggle-text">Короткометражки</span>
       </div>
-
-      <div className="search-form__line"></div>
     </form>
   );
 };
