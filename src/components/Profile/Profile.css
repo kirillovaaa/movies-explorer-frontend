@@ -38,6 +38,11 @@
   line-height: 13px;
 }
 
+.profile__field-input {
+  border: none;
+  text-align: end;
+}
+
 .profile__field-divider {
   width: 100%;
   height: 1px;

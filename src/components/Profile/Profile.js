@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Profile.css";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const [userName, setUserName] = useState("Александра");
+  const [userEmail, setUserEmail] = useState("email@email.com");
+
   const navigate = useNavigate();
 
   const handleClickLogout = () => {
     navigate("/signin");
+  };
+
+  const handleChangeName = (e) => {
+    setUserName(e.target.value);
+  };
+
+  const handleChangeEmail = (e) => {
+    setUserEmail(e.target.value);
   };
 
   return (
@@ -18,20 +29,36 @@ const Profile = () => {
           <div className="profile__container">
             <div className="profile__field">
               <span>Имя</span>
-              <span>Александра</span>
+              <input
+                className="profile__field-input"
+                type="text"
+                name="name"
+                autoComplete="email"
+                placeholder="Имя"
+                value={userName}
+                onChange={handleChangeName}
+              />
             </div>
 
             <div className="profile__field-divider"></div>
 
             <div className="profile__field">
               <span>E-mail</span>
-              <span>kiri2lova@gmail.com</span>
+              <input
+                className="profile__field-input"
+                type="text"
+                name="email"
+                autoComplete="name"
+                placeholder="email@email.com"
+                value={userEmail}
+                onChange={handleChangeEmail}
+              />
             </div>
           </div>
         </section>
 
         <section className="profile__buttons">
-          <button type="button" className="profile__button">
+          <button type="submit" className="profile__button">
             Редактировать
           </button>
 
