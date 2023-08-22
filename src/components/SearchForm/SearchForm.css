@@ -34,8 +34,9 @@
   border-radius: 48px;
   margin: 6px 6px;
   cursor: pointer;
+  transition: opacity 0.15s ease-in-out;
 }
-.search-form__button-switch:hover {
+.search-form__button-search:hover {
   opacity: 0.7;
 }
 .search-form__button-switch {
@@ -46,6 +47,7 @@
   height: 20px;
   position: relative;
   cursor: pointer;
+  transition: opacity 0.15s ease-in-out;
 }
 .search-form__button-switch:hover {
   opacity: 0.7;

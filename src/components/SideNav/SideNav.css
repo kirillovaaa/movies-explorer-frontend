@@ -40,6 +40,10 @@
   border: 0;
   cursor: pointer;
   background-color: transparent;
+  transition: 0.15s ease-in-out;
+}
+.sidenav__close-button:hover {
+  opacity: 0;
 }
 
 .sidenav__tabs {
