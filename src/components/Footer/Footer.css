@@ -34,6 +34,10 @@
   padding: 0;
 }
 
+.footer__link-item {
+  list-style: none;
+}
+
 .footer__copyright {
   margin: 0;
   font-size: 13px;

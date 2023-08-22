@@ -21,20 +21,25 @@ const Footer = () => {
 
       <div className="footer__info">
         <ul className="footer__links">
-          <a
-            className="footer__link"
-            href="https://practicum.yandex.ru/"
-            target="blank"
-          >
-            Яндекс.Практикум
-          </a>
-          <a
-            className="footer__link"
-            href="https://github.com/kirillovaaa"
-            target="blank"
-          >
-            Github
-          </a>
+          <li className="footer__link-item">
+            <a
+              className="footer__link"
+              href="https://practicum.yandex.ru/"
+              target="blank"
+            >
+              Яндекс.Практикум
+            </a>
+          </li>
+
+          <li className="footer__link-item">
+            <a
+              className="footer__link"
+              href="https://github.com/kirillovaaa"
+              target="blank"
+            >
+              Github
+            </a>
+          </li>
         </ul>
 
         <span className="footer__copyright">© 2023</span>

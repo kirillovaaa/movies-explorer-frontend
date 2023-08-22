@@ -62,7 +62,7 @@ const Login = ({ onSubmit }) => {
           </div>
         </section>
 
-        <section className="auth__footer">
+        <div className="auth__footer">
           <button type="submit" className="auth__button">
             Войти
           </button>
@@ -73,7 +73,7 @@ const Login = ({ onSubmit }) => {
               Регистрация
             </Link>
           </span>
-        </section>
+        </div>
       </form>
     </main>
   );

@@ -60,7 +60,7 @@ const Profile = () => {
           </div>
         </section>
 
-        <section className="profile__buttons">
+        <div className="profile__buttons">
           <button type="submit" className="profile__button">
             Редактировать
           </button>
@@ -72,7 +72,7 @@ const Profile = () => {
           >
             Выйти из аккаунта
           </button>
-        </section>
+        </div>
       </form>
     </main>
   );

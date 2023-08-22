@@ -46,7 +46,7 @@ const Register = ({ onSubmit }) => {
               label="Имя"
               value={name}
               onChange={handleChangeName}
-              type="name"
+              type="text"
               autoComplete="name"
               name="name"
               minLength="2"
@@ -82,7 +82,7 @@ const Register = ({ onSubmit }) => {
           </div>
         </section>
 
-        <section className="auth__footer">
+        <div className="auth__footer">
           <button type="submit" className="auth__button">
             Зарегистрироваться
           </button>
@@ -93,7 +93,7 @@ const Register = ({ onSubmit }) => {
               Войти
             </Link>
           </span>
-        </section>
+        </div>
       </form>
     </main>
   );

@@ -1,24 +1,30 @@
 import React from "react";
-import "./NavTab.css";
 import ScrollInto from "react-scroll-into-view";
+import "./NavTab.css";
 
 const NavTab = () => {
   return (
-    <section className="nav-tab">
+    <div className="nav-tab">
       <ul className="nav-tab__items">
-        <ScrollInto selector="#about-project">
-          <span className="nav-tab__item">О проекте</span>
-        </ScrollInto>
+        <li className="nav-tab__item">
+          <ScrollInto selector="#about-project" className="nav-tab__item-link">
+            О проекте
+          </ScrollInto>
+        </li>
 
-        <ScrollInto selector="#techs">
-          <span className="nav-tab__item">Технологии</span>
-        </ScrollInto>
+        <li className="nav-tab__item">
+          <ScrollInto selector="#techs" className="nav-tab__item-link">
+            Технологии
+          </ScrollInto>
+        </li>
 
-        <ScrollInto selector="#about-me">
-          <span className="nav-tab__item">Студент</span>
-        </ScrollInto>
+        <li className="nav-tab__item">
+          <ScrollInto selector="#about-me" className="nav-tab__item-link">
+            Студент
+          </ScrollInto>
+        </li>
       </ul>
-    </section>
+    </div>
   );
 };
 export default NavTab;
