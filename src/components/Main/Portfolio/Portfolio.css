@@ -16,10 +16,12 @@
   display: flex;
   max-width: 100%;
   flex-direction: column;
+  padding: 0;
+  margin: 0;
 }
 
 .portfolio__link {
-  padding-bottom: 19px;
+  padding: 20px 0;
   text-decoration-line: none;
   color: black;
   font-size: 18px;
@@ -31,12 +33,15 @@
   border-bottom: 1px solid #e8e8e8;
 }
 
-.portfolio__link:nth-child(2) {
-  margin-top: 20px;
+.portfolio__link-item {
+  list-style: none;
 }
-.portfolio__link:nth-child(3) {
+
+.portfolio__link-item:nth-child(1) > .portfolio__link {
+  padding-top: 0px;
+}
+.portfolio__link-item:nth-child(3) > .portfolio__link {
   border-bottom: none;
-  margin-top: 20px;
   padding-bottom: 0px;
 }
 .portfolio__link:hover {
