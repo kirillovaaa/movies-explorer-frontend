@@ -74,3 +74,9 @@
     padding: 160px 0 90px;
   }
 }
+
+@media screen and (min-width: 1280px) {
+  .sidenav {
+    display: none;
+  }
+}

@@ -37,13 +37,13 @@
     font-size: 50px;
     line-height: 58px;
     letter-spacing: -2px;
-    transform: translateY(-8px);
+    transform: translateY(0px);
   }
 
   .promo__image {
     width: 320px;
     height: 320px;
-    transform: translateY(-8px);
+    transform: translateY(-20px);
   }
 }
 

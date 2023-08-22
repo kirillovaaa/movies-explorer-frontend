@@ -100,7 +100,7 @@
 
 @media screen and (min-width: 1280px) {
   .about-me {
-    padding: 110px 70px;
+    padding: 110px 70px 100px;
   }
 
   .about-me__avatar {
@@ -111,12 +111,13 @@
     font-size: 50px;
     line-height: 58px;
     letter-spacing: -2px;
-    margin-top: 66px;
+    margin: 66px 0 18px;
   }
 
   .about-me__subtitle {
     font-size: 18px;
     line-height: 20px;
+    margin-bottom: 26px;
   }
 
   .about-me__description {
