@@ -29,8 +29,8 @@
   background: none;
   border: none;
   text-decoration: none;
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 12px;
+  line-height: 15px;
   cursor: pointer;
   color: #ff6838;
 }
@@ -42,22 +42,24 @@
   .page-error__title {
     font-size: 140px;
     line-height: 169px;
+    transform: translateY(-7px);
   }
 
   .page-error__subtitle {
     font-size: 16px;
     line-height: 19px;
+    transform: translateY(-7px);
   }
 
   .page-error__back-button {
     bottom: 20%;
+    font-size: 14px;
+    line-height: 17px;
   }
 }
 
 @media screen and (min-width: 1280px) {
   .page-error__back-button {
     bottom: 60px;
-    font-size: 12px;
-    line-height: 15px;
   }
 }
