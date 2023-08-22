@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, NavLink, useMatch } from "react-router-dom";
+import SideNav from "../SideNav/SideNav";
 import logo from "../../images/logo.svg";
 import menuIcon from "../../images/menu.svg";
 import "./Header.css";
-import SideNav from "../SideNav/SideNav";
 
 const HeaderTab = ({ to, children, onClick }) => {
   return (

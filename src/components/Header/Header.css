@@ -123,24 +123,26 @@
   }
 }
 
-@media screen and (min-width: 1280px) {
-  .header__logo {
-    left: 70px;
-  }
-
+@media screen and (min-width: 769px) {
   .header__tabs {
     display: flex;
   }
 
-  .header__right {
-    right: 70px;
+  .header__menu-button {
+    display: none;
   }
 
   .header__profile-button {
     display: inline-flex;
   }
+}
 
-  .header__menu-button {
-    display: none;
+@media screen and (min-width: 1280px) {
+  .header__logo {
+    left: 70px;
+  }
+
+  .header__right {
+    right: 70px;
   }
 }
