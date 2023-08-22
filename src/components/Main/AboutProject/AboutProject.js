@@ -8,9 +8,9 @@ const AboutProject = () => {
 
       <ul className="about-project__table">
         <li className="about-project__table-cell">
-          <h2 className="about-project__table-heading">
+          <h3 className="about-project__table-heading">
             Дипломный проект включал 5 этапов
-          </h2>
+          </h3>
 
           <p className="about-project__table-text">
             Составление плана, работу над бэкендом, вёрстку, добавление
@@ -19,9 +19,9 @@ const AboutProject = () => {
         </li>
 
         <li className="about-project__table-cell">
-          <h2 className="about-project__table-heading">
+          <h3 className="about-project__table-heading">
             На выполнение диплома ушло 5 недель
-          </h2>
+          </h3>
 
           <p className="about-project__table-text">
             У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было

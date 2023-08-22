@@ -9,7 +9,7 @@ const AboutMe = () => {
 
       <div className="about-me__wrapper">
         <div className="about-me__wrapper-text">
-          <h2 className="about-me__title">Александра</h2>
+          <h3 className="about-me__title">Александра</h3>
 
           <p className="about-me__subtitle">Фронтенд-разработчица, 22 года</p>
 

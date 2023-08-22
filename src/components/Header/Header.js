@@ -45,7 +45,7 @@ const Header = ({ isLoggedIn }) => {
   return (
     <>
       <header className={matchMain ? "header header_blue" : "header"}>
-        <nav>
+        <nav className="header-nav">
           {/* впоследствии заменить на isLoggedIn */}
           <Link to="/">
             <img src={logo} className="header__logo" alt="Логотип" />

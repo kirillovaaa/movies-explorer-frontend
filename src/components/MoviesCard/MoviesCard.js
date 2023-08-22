@@ -5,11 +5,7 @@ import "./MoviesCard.css";
 const MoviesCard = ({ name, time, imageSrc, hasRemoveButton, isSaved }) => {
   return (
     <li className="movies__card">
-      <img
-        className="movies__card-image"
-        src={imageSrc}
-        alt="Картинка отрывка из фильма"
-      />
+      <img className="movies__card-image" src={imageSrc} alt={name} />
 
       <div className="movies__card-description">
         <div className="movies__card-text">
