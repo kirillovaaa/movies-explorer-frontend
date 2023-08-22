@@ -4,7 +4,7 @@ import "./MoviesCard.css";
 
 const MoviesCard = ({ name, time, imageSrc, hasRemoveButton, isSaved }) => {
   return (
-    <div className="movies__card">
+    <li className="movies__card">
       <img
         className="movies__card-image"
         src={imageSrc}
@@ -29,7 +29,7 @@ const MoviesCard = ({ name, time, imageSrc, hasRemoveButton, isSaved }) => {
           ></div>
         )}
       </div>
-    </div>
+    </li>
   );
 };
 

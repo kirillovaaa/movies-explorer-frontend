@@ -1,6 +1,6 @@
 import React from "react";
-import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
+import "./MoviesCardList.css";
 
 const MoviesCardList = ({
   movies,
@@ -10,7 +10,7 @@ const MoviesCardList = ({
 }) => {
   return (
     <>
-      <div className="movies__card-list">
+      <ul className="movies__card-list">
         {movies.map((m) => (
           <MoviesCard
             key={m.id}
@@ -22,7 +22,7 @@ const MoviesCardList = ({
             hasRemoveButton={allowsRemove}
           />
         ))}
-      </div>
+      </ul>
 
       {hasMoreMovies && (
         <button
