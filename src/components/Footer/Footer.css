@@ -57,7 +57,13 @@
 
 @media screen and (min-width: 768px) {
   .footer {
-    padding: 70px 30px 20px;
+    padding: 79px 30px 20px;
+  }
+
+  .footer__description {
+    font-size: 13px;
+    line-height: 16px;
+    margin-bottom: 20px;
   }
 
   .footer__link {
@@ -85,8 +91,9 @@
   .footer {
     font-size: 13px;
     line-height: 16px;
-    padding: 73px 70px 20px;
+    padding: 79px 70px 20px;
   }
+
   .footer__copyright {
     color: #000;
   }
