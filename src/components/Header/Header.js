@@ -45,50 +45,52 @@ const Header = ({ isLoggedIn }) => {
   return (
     <>
       <header className={matchMain ? "header header_blue" : "header"}>
-        {/* впоследствии заменить на isLoggedIn */}
-        <Link to="/">
-          <img src={logo} className="header__logo" alt="Логотип" />
-        </Link>
+        <nav>
+          {/* впоследствии заменить на isLoggedIn */}
+          <Link to="/">
+            <img src={logo} className="header__logo" alt="Логотип" />
+          </Link>
 
-        {/* впоследствии заменить на isLoggedIn */}
-        {!matchMain && (
-          <div className="header__tabs">
-            <HeaderTab to="/movies">Фильмы</HeaderTab>
-            <HeaderTab to="/saved-movies">Сохраненные фильмы</HeaderTab>
-          </div>
-        )}
-
-        <div className="header__right">
-          {!matchMain ? (
-            <>
-              <Link to="/profile" className="header__profile-button">
-                Аккаунт
-              </Link>
-
-              <button
-                type="button"
-                className="header__menu-button"
-                src={menuIcon}
-                onClick={openMenu}
-              >
-                <img src={menuIcon} alt="Меню" />
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="signup" className="header__auth-button">
-                Регистрация
-              </Link>
-
-              <Link
-                to="signin"
-                className="header__auth-button header__auth-button_primary"
-              >
-                Войти
-              </Link>
-            </>
+          {/* впоследствии заменить на isLoggedIn */}
+          {!matchMain && (
+            <div className="header__tabs">
+              <HeaderTab to="/movies">Фильмы</HeaderTab>
+              <HeaderTab to="/saved-movies">Сохраненные фильмы</HeaderTab>
+            </div>
           )}
-        </div>
+
+          <div className="header__right">
+            {!matchMain ? (
+              <>
+                <Link to="/profile" className="header__profile-button">
+                  Аккаунт
+                </Link>
+
+                <button
+                  type="button"
+                  className="header__menu-button"
+                  src={menuIcon}
+                  onClick={openMenu}
+                >
+                  <img src={menuIcon} alt="Меню" />
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="signup" className="header__auth-button">
+                  Регистрация
+                </Link>
+
+                <Link
+                  to="signin"
+                  className="header__auth-button header__auth-button_primary"
+                >
+                  Войти
+                </Link>
+              </>
+            )}
+          </div>
+        </nav>
       </header>
 
       <SideNav isMenuOpen={isMenuOpen} onCloseMenu={closeMenu} />

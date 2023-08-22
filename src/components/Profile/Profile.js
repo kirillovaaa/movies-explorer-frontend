@@ -10,9 +10,9 @@ const Profile = () => {
   };
 
   return (
-    <section className="profile">
-      <div className="profile__form">
-        <div className="profile__top">
+    <main className="profile">
+      <form className="profile__form">
+        <section className="profile__top">
           <h1 className="profile__welcome">Привет, Александра!</h1>
 
           <div className="profile__container">
@@ -28,9 +28,9 @@ const Profile = () => {
               <span>kiri2lova@gmail.com</span>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div className="profile__buttons">
+        <section className="profile__buttons">
           <button type="button" className="profile__button">
             Редактировать
           </button>
@@ -42,9 +42,9 @@ const Profile = () => {
           >
             Выйти из аккаунта
           </button>
-        </div>
-      </div>
-    </section>
+        </section>
+      </form>
+    </main>
   );
 };
 

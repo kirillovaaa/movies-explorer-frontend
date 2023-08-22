@@ -31,9 +31,9 @@ const Register = ({ onSubmit }) => {
   };
 
   return (
-    <section className="auth">
+    <main className="auth">
       <form className="auth__form" onSubmit={handleSubmit}>
-        <div className="auth__top auth__top_signup">
+        <section className="auth__top auth__top_signup">
           <div className="auth__header">
             <Link to="/">
               <img src={logo} className="auth__logo" alt="Логотип" />
@@ -80,9 +80,9 @@ const Register = ({ onSubmit }) => {
               required={true}
             />
           </div>
-        </div>
+        </section>
 
-        <div className="auth__footer">
+        <section className="auth__footer">
           <button type="submit" className="auth__button">
             Зарегистрироваться
           </button>
@@ -93,9 +93,9 @@ const Register = ({ onSubmit }) => {
               Войти
             </Link>
           </span>
-        </div>
+        </section>
       </form>
-    </section>
+    </main>
   );
 };
 

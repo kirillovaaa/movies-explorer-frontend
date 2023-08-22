@@ -10,9 +10,11 @@ const Page404 = () => {
   };
 
   return (
-    <section className="page-error">
-      <h1 className="page-error__title">404</h1>
-      <p className="page-error__subtitle">Страница не найдена</p>
+    <main className="page-error">
+      <section>
+        <h1 className="page-error__title">404</h1>
+        <p className="page-error__subtitle">Страница не найдена</p>
+      </section>
 
       <button
         type="button"
@@ -21,7 +23,7 @@ const Page404 = () => {
       >
         Назад
       </button>
-    </section>
+    </main>
   );
 };
 

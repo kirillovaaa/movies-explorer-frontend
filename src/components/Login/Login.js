@@ -24,9 +24,9 @@ const Login = ({ onSubmit }) => {
   };
 
   return (
-    <section className="auth">
+    <main className="auth">
       <form className="auth__form" onSubmit={handleSubmit}>
-        <div className="auth__top">
+        <section className="auth__top">
           <div className="auth__header">
             <Link to="/">
               <img src={logo} className="auth__logo" alt="Логотип" />
@@ -57,9 +57,9 @@ const Login = ({ onSubmit }) => {
               required={true}
             />
           </div>
-        </div>
+        </section>
 
-        <div className="auth__footer">
+        <section className="auth__footer">
           <button type="submit" className="auth__button">
             Войти
           </button>
@@ -70,9 +70,9 @@ const Login = ({ onSubmit }) => {
               Регистрация
             </Link>
           </span>
-        </div>
+        </section>
       </form>
-    </section>
+    </main>
   );
 };
 
