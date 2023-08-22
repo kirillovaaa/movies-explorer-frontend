@@ -84,6 +84,10 @@
 }
 
 @media screen and (min-width: 768px) {
+  .about-project {
+    padding: 90px 50px;
+  }
+
   .section-header {
     font-size: 22px;
     line-height: 27px;
@@ -92,11 +96,13 @@
   }
 
   .about-project__table {
-    margin: 70px 0 90px;
+    margin: 70px 0 93px;
     gap: 30px;
   }
 
   .about-project__table-heading {
+    font-size: 20px;
+    line-height: 24px;
     letter-spacing: -0.8px;
     margin-bottom: 22px;
   }
@@ -117,6 +123,10 @@
   .about-project__plan {
     font-size: 14px;
     line-height: 17px;
+  }
+
+  .about-project__plan_current {
+    height: 36px;
   }
 }
 

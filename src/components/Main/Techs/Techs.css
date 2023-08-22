@@ -50,7 +50,7 @@
 
 @media screen and (min-width: 768px) {
   .techs {
-    padding: 80px 50px;
+    padding: 90px 50px;
   }
 
   .techs__title {
@@ -64,18 +64,11 @@
     font-size: 12px;
     line-height: 18px;
     letter-spacing: -0.48px;
-    margin-bottom: 80px;
+    margin-bottom: 83px;
   }
 
   .techs__items {
     padding: 0;
-  }
-
-  .techs__item {
-    width: 84px;
-    font-size: 14px;
-    line-height: 17px;
-    gap: 10px;
   }
 }
 
@@ -93,5 +86,11 @@
     line-height: 20px;
     letter-spacing: -0.56px;
     margin-bottom: 100px;
+  }
+
+  .techs__item {
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.56px;
   }
 }

@@ -66,7 +66,7 @@
   }
 
   .about-me__git-link {
-    padding-top: 20px;
+    margin-top: 87px;
   }
 
   .about-me__wrapper {
@@ -77,13 +77,14 @@
   .about-me__avatar {
     order: 1;
     max-width: 255px;
+    margin-top: 66px;
   }
 
   .about-me__title {
     font-size: 40px;
     line-height: 40px;
     letter-spacing: -1.6px;
-    margin-top: 66px;
+    margin: 66px 0 16px;
   }
 
   .about-me__subtitle {
@@ -124,6 +125,6 @@
   }
 
   .about-me__git-link {
-    margin-top: 80px;
+    margin-top: 100px;
   }
 }
