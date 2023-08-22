@@ -69,7 +69,6 @@ const Header = ({ isLoggedIn }) => {
                 <button
                   type="button"
                   className="header__menu-button"
-                  src={menuIcon}
                   onClick={openMenu}
                 >
                   <img src={menuIcon} alt="Меню" />
