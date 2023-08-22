@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { Link, NavLink, useMatch, useNavigate } from "react-router-dom";
+import { Link, NavLink, useMatch } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import menuIcon from "../../images/menu.svg";
-import crossIcon from "../../images/cross.svg";
 import "./Header.css";
+import SideNav from "../SideNav/SideNav";
 
-const HeaderLink = ({ to, children, onClick }) => {
+const HeaderTab = ({ to, children, onClick }) => {
   return (
     <NavLink
       to={to}
       className={({ isActive }) =>
-        `header__link ${isActive ? "header__link_active" : ""}`
+        isActive ? "header__tab header__tab_active" : "header_tab"
       }
       onClick={onClick}
     >
@@ -22,17 +22,10 @@ const HeaderLink = ({ to, children, onClick }) => {
 const Header = ({ isLoggedIn }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const navigate = useNavigate();
-
   const matchMain = useMatch("/");
   const matchMovies = useMatch("/movies");
   const matchSavedMovies = useMatch("/saved-movies");
   const matchProfile = useMatch("/profile");
-
-  const handleClickAccount = () => {
-    navigate("/profile");
-    closeMenu();
-  };
 
   const openMenu = () => {
     setIsMenuOpen(true);
@@ -40,10 +33,6 @@ const Header = ({ isLoggedIn }) => {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
-  };
-
-  const handleCaptureSidenav = (e) => {
-    e.stopPropagation();
   };
 
   const showHeader =
@@ -55,34 +44,30 @@ const Header = ({ isLoggedIn }) => {
 
   return (
     <>
-      <header className={`header ${matchMain ? "header_blue" : ""}`}>
+      <header className={matchMain ? "header header_blue" : "header"}>
         {/* впоследствии заменить на isLoggedIn */}
         <Link to="/">
-          <img src={logo} className="header__logo" alt="movies-logo" />
+          <img src={logo} className="header__logo" alt="Логотип" />
         </Link>
 
         {/* впоследствии заменить на isLoggedIn */}
         {!matchMain && (
-          <div className="header__links header__links_desktop">
-            <HeaderLink to="/movies">Фильмы</HeaderLink>
-            <HeaderLink to="/saved-movies">Сохраненные фильмы</HeaderLink>
+          <div className="header__tabs">
+            <HeaderTab to="/movies">Фильмы</HeaderTab>
+            <HeaderTab to="/saved-movies">Сохраненные фильмы</HeaderTab>
           </div>
         )}
 
-        <div className="header__actions">
+        <div className="header__right">
           {!matchMain ? (
             <>
-              <button
-                type="button"
-                className="header__button header__button_pill header__button_desktop"
-                onClick={handleClickAccount}
-              >
+              <Link to="/profile" className="header__profile-button">
                 Аккаунт
-              </button>
+              </Link>
 
               <button
                 type="button"
-                className="header__icon-button header__icon-button_mobile"
+                className="header__menu-button"
                 src={menuIcon}
                 onClick={openMenu}
               >
@@ -90,62 +75,23 @@ const Header = ({ isLoggedIn }) => {
               </button>
             </>
           ) : (
-            <div className="header__auth">
-              <Link to="signup" className="header__button header__button_auth">
+            <>
+              <Link to="signup" className="header__auth-button">
                 Регистрация
               </Link>
 
               <Link
                 to="signin"
-                className="header__button header__button_primary header__button_auth"
+                className="header__auth-button header__auth-button_primary"
               >
                 Войти
               </Link>
-            </div>
+            </>
           )}
         </div>
       </header>
 
-      <div
-        className="header__sidenav"
-        style={{ visibility: isMenuOpen ? "visible" : "hidden" }}
-        onClick={closeMenu}
-      >
-        <div className="header__sidenav-main">
-          <div
-            className="header__links header__links_sidenav"
-            onClick={handleCaptureSidenav}
-          >
-            <button
-              type="button"
-              className="header__icon-button"
-              onClick={closeMenu}
-            >
-              <img src={crossIcon} alt="Закрыть" />
-            </button>
-
-            <HeaderLink to="/" onClick={closeMenu}>
-              Главная
-            </HeaderLink>
-
-            <HeaderLink to="/movies" onClick={closeMenu}>
-              Фильмы
-            </HeaderLink>
-
-            <HeaderLink to="/saved-movies" onClick={closeMenu}>
-              Сохраненные фильмы
-            </HeaderLink>
-
-            <button
-              type="button"
-              className="header__button header__button_pill"
-              onClick={handleClickAccount}
-            >
-              Аккаунт
-            </button>
-          </div>
-        </div>
-      </div>
+      <SideNav isMenuOpen={isMenuOpen} onCloseMenu={closeMenu} />
     </>
   );
 };

@@ -1,0 +1,76 @@
+.sidenav {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.sidenav_active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.sidenav__main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 520px;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+.sidenav__close-button {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.sidenav__tabs {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 144px 0 46px;
+}
+
+.sidenav__tab {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 500;
+  padding: 4px 0;
+}
+.sidenav__tab:hover {
+  opacity: 0.7;
+}
+.sidenav__tab:visited {
+  color: inherit;
+}
+.sidenav__link_active {
+  border-bottom: solid 2px #000000;
+}
+
+.sidenav__profile-button {
+  margin-top: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .sidenav__links {
+    padding: 160px 0 90px;
+  }
+}
