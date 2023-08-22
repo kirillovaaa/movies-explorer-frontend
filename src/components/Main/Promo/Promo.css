@@ -1,6 +1,6 @@
 .promo {
   display: flex;
-  height: calc(100vh - 74px - 66px);
+  height: 570px;
   align-items: center;
   justify-content: center;
   padding: 0 10px;
@@ -29,6 +29,7 @@
 
 @media screen and (min-width: 768px) {
   .promo {
+    height: 784px;
     padding: 0 30px;
   }
 
