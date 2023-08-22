@@ -39,8 +39,16 @@
 }
 
 .profile__field-input {
-  border: none;
+  width: 160px;
   text-align: end;
+  border: none;
+  border-radius: 1px;
+}
+.profile__field-input:focus {
+  outline-offset: 4px;
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: black;
 }
 
 .profile__field-divider {

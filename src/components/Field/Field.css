@@ -17,7 +17,10 @@
   color: #ee3465;
 }
 .auth__input:focus {
-  outline: none;
+  outline-offset: 2px;
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: black;
 }
 
 .auth__input-label {

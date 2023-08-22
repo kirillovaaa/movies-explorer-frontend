@@ -1,6 +1,6 @@
 import React from "react";
-import "./SearchForm.css";
 import iconSearch from "../../images/icon-search.svg";
+import "./SearchForm.css";
 
 const SearchForm = () => {
   return (

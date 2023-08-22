@@ -21,9 +21,13 @@
   line-height: 17px;
   background-color: #f9f9f9;
   border: none;
+  border-radius: 40px;
 }
 .search-form__input:focus {
-  outline: none;
+  outline-offset: -2px;
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: #ff6838;
 }
 
 .search-form__button-search {
@@ -32,7 +36,7 @@
   width: 80px;
   height: 34px;
   border-radius: 48px;
-  margin: 6px 6px;
+  margin: 6px;
   cursor: pointer;
   transition: opacity 0.15s ease-in-out;
 }

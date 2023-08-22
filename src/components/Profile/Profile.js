@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./Profile.css";
 import { useNavigate } from "react-router-dom";
+import "./Profile.css";
 
 const Profile = () => {
   const [userName, setUserName] = useState("Александра");
