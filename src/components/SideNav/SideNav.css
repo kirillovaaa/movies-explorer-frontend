@@ -17,18 +17,20 @@
 .sidenav__main {
   flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   max-width: 520px;
   height: 100vh;
+  padding: 144px 0 46px;
   background-color: #ffffff;
 }
 
 .sidenav__close-button {
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 10px;
+  right: 10px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -41,19 +43,18 @@
 }
 
 .sidenav__tabs {
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  padding: 144px 0 46px;
+  gap: 15px;
 }
 
 .sidenav__tab {
   font-size: 18px;
   line-height: 22px;
   font-weight: 500;
-  padding: 4px 0;
+  padding: 0 0 9px;
+  text-decoration: none;
 }
 .sidenav__tab:hover {
   opacity: 0.7;
@@ -61,17 +62,47 @@
 .sidenav__tab:visited {
   color: inherit;
 }
-.sidenav__link_active {
+.sidenav__tab_active {
   border-bottom: solid 2px #000000;
 }
 
 .sidenav__profile-button {
-  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  width: 100px;
+  height: 32px;
+  border-radius: 16px;
+  background-color: #f9f9f9;
+  color: #000000;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.1s ease-in-out;
+}
+.sidenav__profile-button:hover {
+  opacity: 0.7;
 }
 
 @media screen and (min-width: 768px) {
-  .sidenav__links {
-    padding: 160px 0 90px;
+  .sidenav__main {
+    padding: 159px 0 90px;
+  }
+
+  .sidenav__close-button {
+    top: 18px;
+    right: 18px;
+  }
+
+  .sidenav__tabs {
+    gap: 22px;
+  }
+
+  .sidenav__tab {
+    padding: 0 0 6px;
   }
 }
 

@@ -10,7 +10,7 @@ const HeaderTab = ({ to, children, onClick }) => {
     <NavLink
       to={to}
       className={({ isActive }) =>
-        isActive ? "header__tab header__tab_active" : "header_tab"
+        isActive ? "header__tab header__tab_active" : "header__tab"
       }
       onClick={onClick}
     >

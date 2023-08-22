@@ -8,7 +8,7 @@ const SideNavLink = ({ to, children, onClick }) => {
     <NavLink
       to={to}
       className={({ isActive }) =>
-        isActive ? "sidenav__tab sidenav__tab_active" : "sidenav_tab"
+        isActive ? "sidenav__tab sidenav__tab_active" : "sidenav__tab"
       }
       onClick={onClick}
     >
@@ -37,7 +37,7 @@ const SideNav = ({ isMenuOpen, onCloseMenu }) => {
           <img src={crossIcon} alt="Закрыть" />
         </button>
 
-        <div className="sidenav__links" onClick={handleCaptureSidenav}>
+        <div className="sidenav__tabs" onClick={handleCaptureSidenav}>
           <SideNavLink to="/" onClick={onCloseMenu}>
             Главная
           </SideNavLink>
@@ -49,11 +49,11 @@ const SideNav = ({ isMenuOpen, onCloseMenu }) => {
           <SideNavLink to="/saved-movies" onClick={onCloseMenu}>
             Сохраненные фильмы
           </SideNavLink>
-
-          <Link to="/profile" className="sidenav__profile-button">
-            Аккаунт
-          </Link>
         </div>
+
+        <Link to="/profile" className="sidenav__profile-button">
+          Аккаунт
+        </Link>
       </div>
     </aside>
   );

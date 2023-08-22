@@ -91,9 +91,6 @@
 }
 
 .header__menu-button {
-  position: absolute;
-  top: 14px;
-  right: 14px;
   width: 40px;
   height: 40px;
   display: inline-flex;
