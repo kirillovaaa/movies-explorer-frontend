@@ -41,6 +41,7 @@ const Login = ({ onSubmit }) => {
               label="E-mail"
               name="email"
               type="email"
+              minLength={8}
               placeholder="email@email.com"
               autoComplete="email"
               required={true}
@@ -52,6 +53,8 @@ const Login = ({ onSubmit }) => {
               label="Пароль"
               name="password"
               type="password"
+              minLength={8}
+              maxLength={16}
               placeholder="password"
               autoComplete="current-password"
               required={true}

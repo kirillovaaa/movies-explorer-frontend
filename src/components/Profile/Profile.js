@@ -35,6 +35,8 @@ const Profile = () => {
                 name="name"
                 autoComplete="email"
                 placeholder="Имя"
+                minLength={2}
+                maxLength={30}
                 value={userName}
                 onChange={handleChangeName}
               />
@@ -50,6 +52,7 @@ const Profile = () => {
                 name="email"
                 autoComplete="name"
                 placeholder="email@email.com"
+                minLength={8}
                 value={userEmail}
                 onChange={handleChangeEmail}
               />
