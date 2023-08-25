@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Profile.css";
 
-const Profile = () => {
+const Profile = ({ onLogout }) => {
   const [userName, setUserName] = useState("Александра");
   const [userEmail, setUserEmail] = useState("email@email.com");
 
@@ -10,6 +10,7 @@ const Profile = () => {
 
   const handleClickLogout = () => {
     navigate("/signin");
+    onLogout();
   };
 
   const handleChangeName = (e) => {

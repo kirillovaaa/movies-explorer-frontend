@@ -1,33 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 // все нужные нам стили уже есть в другом компоненте -> Signin
 // здесь только перегрузка для маргина нижнего блока
 import "./Register.css";
-import logo from "../../images/logo.svg";
 import Field from "../Field/Field";
+import useForm from "../../utils/useForm";
+import logo from "../../images/logo.svg";
 
 const Register = ({ onSubmit }) => {
-  const [name, setName] = useState("Александра");
-  const [email, setEmail] = useState("pochta@yandex.ru");
-  const [password, setPassword] = useState("••••••••••••••");
-
-  const handleChangeName = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
+  const { values, handleChange } = useForm();
 
   const handleSubmit = (e) => {
     // отменяем стандартный переход на адрес формы
     e.preventDefault();
     // вызываем обработчик нажатия на кнопку "Войти"
-    onSubmit({ email, password });
+    onSubmit({
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    });
   };
 
   return (
@@ -44,8 +35,7 @@ const Register = ({ onSubmit }) => {
           <div className="auth__fields">
             <Field
               label="Имя"
-              value={name}
-              onChange={handleChangeName}
+              onChange={handleChange}
               type="text"
               autoComplete="name"
               name="name"
@@ -57,8 +47,7 @@ const Register = ({ onSubmit }) => {
 
             <Field
               label="E-mail"
-              value={email}
-              onChange={handleChangeEmail}
+              onChange={handleChange}
               type="email"
               autoComplete="email"
               placeholder="email@email.com"
@@ -68,15 +57,13 @@ const Register = ({ onSubmit }) => {
 
             <Field
               label="Пароль"
-              value={password}
-              onChange={handleChangePassword}
+              onChange={handleChange}
               type="password"
               autoComplete="new-password"
               name="password"
               minLength="2"
               maxLength="30"
               placeholder="password"
-              errorMessage="Что-то пошло не так..."
               required={true}
             />
           </div>

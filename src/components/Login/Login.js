@@ -1,26 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import Field from "../Field/Field";
+import useForm from "../../utils/useForm";
 import logo from "../../images/logo.svg";
 
 const Login = ({ onSubmit }) => {
-  const [email, setEmail] = useState("pochta@yandex.ru");
-  const [password, setPassword] = useState("");
-
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
+  const { values, handleChange } = useForm();
 
   const handleSubmit = (e) => {
     // отменяем стандартный переход на адрес формы
     e.preventDefault();
     // вызываем обработчик нажатия на кнопку "Войти"
-    onSubmit({ email, password });
+    onSubmit({
+      email: values.email,
+      password: values.password,
+    });
   };
 
   return (
@@ -36,20 +31,17 @@ const Login = ({ onSubmit }) => {
 
           <div className="auth__fields">
             <Field
-              value={email}
-              onChange={handleChangeEmail}
               label="E-mail"
               name="email"
               type="email"
               minLength={8}
               placeholder="email@email.com"
               autoComplete="email"
+              onChange={handleChange}
               required={true}
             />
 
             <Field
-              value={password}
-              onChange={handleChangePassword}
               label="Пароль"
               name="password"
               type="password"
@@ -57,6 +49,7 @@ const Login = ({ onSubmit }) => {
               maxLength={16}
               placeholder="password"
               autoComplete="current-password"
+              onChange={handleChange}
               required={true}
             />
           </div>
