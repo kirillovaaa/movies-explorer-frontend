@@ -6,7 +6,7 @@ const ProtectedRoute = ({ element: Component, isLoggedIn }) => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate("/sign-in", { replace: true });
+      navigate("/signin", { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);

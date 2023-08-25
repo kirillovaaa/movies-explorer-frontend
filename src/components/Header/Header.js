@@ -45,14 +45,12 @@ const Header = ({ isLoggedIn }) => {
   return (
     <>
       <header className={matchMain ? "header header_blue" : "header"}>
-        <nav className="header-nav">
-          {/* впоследствии заменить на isLoggedIn */}
+        <nav className="header__nav">
           <Link to="/">
             <img src={logo} className="header__logo" alt="Логотип" />
           </Link>
 
-          {/* впоследствии заменить на isLoggedIn */}
-          {!matchMain && (
+          {isLoggedIn && (
             <div className="header__tabs">
               <HeaderTab to="/movies">Фильмы</HeaderTab>
               <HeaderTab to="/saved-movies">Сохраненные фильмы</HeaderTab>
@@ -60,7 +58,7 @@ const Header = ({ isLoggedIn }) => {
           )}
 
           <div className="header__right">
-            {!matchMain ? (
+            {isLoggedIn ? (
               <>
                 <Link to="/profile" className="header__profile-button">
                   Аккаунт

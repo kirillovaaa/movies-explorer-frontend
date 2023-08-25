@@ -14,7 +14,7 @@ import Register from "../Register/Register";
 import Page404 from "../Page404/Page404";
 
 const App = () => {
-  const [isLoggedIn] = useState(true);
+  const [isLoggedIn] = useState(false);
 
   return (
     <>

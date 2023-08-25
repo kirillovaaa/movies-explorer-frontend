@@ -9,6 +9,10 @@
   background-color: #465dff;
 }
 
+.header_blue > .header__nav {
+  color: #ffffff;
+}
+
 .header__logo {
   position: absolute;
   top: 18px;
