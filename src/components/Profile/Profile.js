@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./Profile.css";
 
-const Profile = ({ onLogout }) => {
-  const [userName, setUserName] = useState("Александра");
-  const [userEmail, setUserEmail] = useState("email@email.com");
+const Profile = ({ onSubmit, onLogout }) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const currentUser = useContext(CurrentUserContext);
+
+  useEffect(() => {
+    setName(currentUser.name);
+    setEmail(currentUser.email);
+  }, [currentUser]);
 
   const navigate = useNavigate();
 
@@ -14,18 +22,23 @@ const Profile = ({ onLogout }) => {
   };
 
   const handleChangeName = (e) => {
-    setUserName(e.target.value);
+    setName(e.target.value);
   };
 
   const handleChangeEmail = (e) => {
-    setUserEmail(e.target.value);
+    setEmail(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit({ name, email });
   };
 
   return (
     <main className="profile">
-      <form className="profile__form">
+      <form className="profile__form" onSubmit={handleSubmit}>
         <section className="profile__top">
-          <h1 className="profile__welcome">Привет, Александра!</h1>
+          <h1 className="profile__welcome">Привет, {currentUser.name}!</h1>
 
           <div className="profile__container">
             <div className="profile__field">
@@ -38,7 +51,7 @@ const Profile = ({ onLogout }) => {
                 placeholder="Имя"
                 minLength={2}
                 maxLength={30}
-                value={userName}
+                value={name}
                 onChange={handleChangeName}
               />
             </div>
@@ -54,7 +67,7 @@ const Profile = ({ onLogout }) => {
                 autoComplete="name"
                 placeholder="email@email.com"
                 minLength={8}
-                value={userEmail}
+                value={email}
                 onChange={handleChangeEmail}
               />
             </div>

@@ -84,6 +84,16 @@ const App = () => {
       });
   };
 
+  const handleEditProfile = ({ name, email }) => {
+    MainApi.setUserInfo(name, email)
+      .then((user) => {
+        setCurrentUser(user);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Header isLoggedIn={isLoggedIn} />
@@ -110,7 +120,9 @@ const App = () => {
           element={
             <ProtectedRoute
               isLoggedIn={isLoggedIn}
-              element={<Profile onLogout={handleLogout} />}
+              element={
+                <Profile onSubmit={handleEditProfile} onLogout={handleLogout} />
+              }
             />
           }
         />

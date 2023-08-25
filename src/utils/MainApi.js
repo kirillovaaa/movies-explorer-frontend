@@ -66,17 +66,17 @@ class Api {
     }).then(this._getResponseData);
   };
 
+  setUserInfo = (name, email) => {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({ name, email }),
+    }).then(this._getResponseData);
+  };
+
   //   getInitialCards = () => {
   //     return fetch(`${this._baseUrl}/cards`, {
   //       headers: this._headers,
-  //     }).then(this._getResponseData);
-  //   };
-
-  //   setUserInfo = (name, about) => {
-  //     return fetch(`${this._baseUrl}/users/me`, {
-  //       method: "PATCH",
-  //       headers: this._headers,
-  //       body: JSON.stringify({ name, about }),
   //     }).then(this._getResponseData);
   //   };
 
