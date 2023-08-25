@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import iconSearch from "../../images/icon-search.svg";
 import "./SearchForm.css";
+import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
 const SearchForm = () => {
+  const [filterEnabled, setFilterEnabled] = useState(false);
+
+  const handleToggleFilter = () => {
+    setFilterEnabled(!filterEnabled);
+  };
+
   return (
     <form className="search-form">
       <div className="search-form__input-wrapper">
@@ -23,10 +30,7 @@ const SearchForm = () => {
         </button>
       </div>
 
-      <div className="search-form__toggle-wrapper">
-        <button type="button" className="search-form__button-switch"></button>
-        <span className="search-form__toggle-text">Короткометражки</span>
-      </div>
+      <FilterCheckbox isEnabled={filterEnabled} onToggle={handleToggleFilter} />
     </form>
   );
 };
