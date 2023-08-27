@@ -8,7 +8,9 @@
 .header_blue {
   background-color: #465dff;
 }
-
+.header_blue .header__menu-button {
+  filter: invert(1);
+}
 .header_blue > .header__nav {
   color: #ffffff;
 }
