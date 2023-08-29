@@ -2,14 +2,14 @@ import React from "react";
 import { useMatch } from "react-router-dom";
 import "./Footer.css";
 
-const Footer = () => {
+const Footer = ({ isAppLoading }) => {
   const matchMain = useMatch("/");
   const matchMovies = useMatch("/movies");
   const matchSavedMovies = useMatch("/saved-movies");
 
-  const showFooter = matchMain || matchMovies || matchSavedMovies;
+  const matchRoutes = matchMain || matchMovies || matchSavedMovies;
 
-  if (!showFooter) {
+  if (!matchRoutes || isAppLoading) {
     return null;
   }
 

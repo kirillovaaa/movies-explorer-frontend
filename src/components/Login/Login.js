@@ -2,25 +2,36 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import Field from "../Field/Field";
-import useForm from "../../utils/useForm";
+import { useForm } from "react-hook-form";
 import logo from "../../images/logo.svg";
 
 const Login = ({ onSubmit }) => {
-  const { values, handleChange } = useForm();
-
-  const handleSubmit = (e) => {
-    // отменяем стандартный переход на адрес формы
-    e.preventDefault();
-    // вызываем обработчик нажатия на кнопку "Войти"
-    onSubmit({
-      email: values.email,
-      password: values.password,
-    });
-  };
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
   return (
     <main className="auth">
-      <form className="auth__form" onSubmit={handleSubmit}>
+      <form
+        className="auth__form"
+        onSubmit={handleSubmit((data) => {
+          onSubmit(data).catch((e) => {
+            if (e.message.includes("email")) {
+              setError("email", { message: e.message });
+            } else {
+              setError("password", { message: e.message });
+            }
+          });
+        })}
+      >
         <section className="auth__top">
           <div className="auth__header">
             <Link to="/">
@@ -31,26 +42,44 @@ const Login = ({ onSubmit }) => {
 
           <div className="auth__fields">
             <Field
+              {...register("email", {
+                required: {
+                  message: "Обязательное поле",
+                },
+                minLength: {
+                  value: 8,
+                  message: "Минимальная длина 8 символов",
+                },
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Укажите валидный e-mail адрес",
+                },
+              })}
               label="E-mail"
-              name="email"
-              type="email"
-              minLength={8}
               placeholder="email@email.com"
               autoComplete="email"
-              onChange={handleChange}
-              required={true}
+              errorMessage={errors.email?.message}
             />
 
             <Field
+              {...register("password", {
+                required: {
+                  message: "Обязательное поле",
+                },
+                minLength: {
+                  value: 8,
+                  message: "Минимальная длина 8 символов",
+                },
+                maxLength: {
+                  value: 16,
+                  message: "Максимальная длина 16 символов",
+                },
+              })}
               label="Пароль"
-              name="password"
               type="password"
-              minLength={8}
-              maxLength={16}
               placeholder="password"
               autoComplete="current-password"
-              onChange={handleChange}
-              required={true}
+              errorMessage={errors.password?.message}
             />
           </div>
         </section>

@@ -1,16 +1,18 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import Preloader from "../Preloader/Preloader";
+import "./ProtectedRoute.css";
 
-const ProtectedRoute = ({ element: Component, isLoggedIn }) => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate("/signin", { replace: true });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn]);
-
+const ProtectedRoute = ({ element: Component, isLoggedIn, isAppLoading }) => {
+  if (isAppLoading) {
+    return (
+      <div className="preloader-wrapper">
+        <Preloader />
+      </div>
+    );
+  }
+  if (!isLoggedIn) {
+    return <Navigate to="/signin" replace={true} />;
+  }
   return Component;
 };
 

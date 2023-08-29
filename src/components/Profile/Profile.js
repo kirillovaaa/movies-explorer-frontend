@@ -1,18 +1,22 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./Profile.css";
 
 const Profile = ({ onSubmit, onLogout }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-
   const currentUser = useContext(CurrentUserContext);
 
-  useEffect(() => {
-    setName(currentUser.name);
-    setEmail(currentUser.email);
-  }, [currentUser]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      name: currentUser.name,
+      email: currentUser.email,
+    },
+  });
 
   const navigate = useNavigate();
 
@@ -21,22 +25,14 @@ const Profile = ({ onSubmit, onLogout }) => {
     onLogout();
   };
 
-  const handleChangeName = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit({ name, email });
-  };
-
   return (
     <main className="profile">
-      <form className="profile__form" onSubmit={handleSubmit}>
+      <form
+        className="profile__form"
+        onSubmit={handleSubmit((data) => {
+          onSubmit(data);
+        })}
+      >
         <section className="profile__top">
           <h1 className="profile__welcome">Привет, {currentUser.name}!</h1>
 
@@ -44,15 +40,23 @@ const Profile = ({ onSubmit, onLogout }) => {
             <div className="profile__field">
               <span>Имя</span>
               <input
+                {...register("name", {
+                  required: {
+                    message: "Обязательное поле",
+                  },
+                  minLength: {
+                    value: 2,
+                    message: "Минимальная длина 2 символа",
+                  },
+                  maxLength: {
+                    value: 30,
+                    message: "Минимальная длина 30 символов",
+                  },
+                })}
                 className="profile__field-input"
                 type="text"
-                name="name"
-                autoComplete="email"
+                autoComplete="name"
                 placeholder="Имя"
-                minLength={2}
-                maxLength={30}
-                value={name}
-                onChange={handleChangeName}
               />
             </div>
 
@@ -61,14 +65,19 @@ const Profile = ({ onSubmit, onLogout }) => {
             <div className="profile__field">
               <span>E-mail</span>
               <input
+                {...register("email", {
+                  required: {
+                    message: "Обязательное поле",
+                  },
+                  minLength: {
+                    value: 6,
+                    message: "Минимальная длина 6 символов",
+                  },
+                })}
                 className="profile__field-input"
                 type="text"
-                name="email"
-                autoComplete="name"
+                autoComplete="email"
                 placeholder="email@email.com"
-                minLength={8}
-                value={email}
-                onChange={handleChangeEmail}
               />
             </div>
           </div>

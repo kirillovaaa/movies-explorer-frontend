@@ -1,29 +1,40 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 // все нужные нам стили уже есть в другом компоненте -> Signin
 // здесь только перегрузка для маргина нижнего блока
 import "./Register.css";
 import Field from "../Field/Field";
-import useForm from "../../utils/useForm";
 import logo from "../../images/logo.svg";
 
 const Register = ({ onSubmit }) => {
-  const { values, handleChange } = useForm();
-
-  const handleSubmit = (e) => {
-    // отменяем стандартный переход на адрес формы
-    e.preventDefault();
-    // вызываем обработчик нажатия на кнопку "Войти"
-    onSubmit({
-      name: values.name,
-      email: values.email,
-      password: values.password,
-    });
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+  });
 
   return (
     <main className="auth">
-      <form className="auth__form" onSubmit={handleSubmit}>
+      <form
+        className="auth__form"
+        onSubmit={handleSubmit((data) => {
+          onSubmit(data).catch((e) => {
+            if (e.message.includes("email")) {
+              setError("email", { message: e.message });
+            } else {
+              setError("password", { message: e.message });
+            }
+          });
+        })}
+      >
         <section className="auth__top auth__top_signup">
           <div className="auth__header">
             <Link to="/">
@@ -34,37 +45,65 @@ const Register = ({ onSubmit }) => {
 
           <div className="auth__fields">
             <Field
+              {...register("name", {
+                required: {
+                  message: "Обязательное поле",
+                },
+                minLength: {
+                  value: 2,
+                  message: "Минимальная длина 2 символа",
+                },
+                maxLength: {
+                  value: 30,
+                  message: "Минимальная длина 30 символов",
+                },
+              })}
               label="Имя"
-              onChange={handleChange}
               type="text"
               autoComplete="name"
-              name="name"
-              minLength="2"
-              maxLength="30"
-              placeholder="Александра"
-              required={true}
+              placeholder="Имя"
+              errorMessage={errors.name?.message}
             />
 
             <Field
+              {...register("email", {
+                required: {
+                  message: "Обязательное поле",
+                },
+                minLength: {
+                  value: 8,
+                  message: "Минимальная длина 8 символов",
+                },
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Укажите валидный e-mail адрес",
+                },
+              })}
               label="E-mail"
-              onChange={handleChange}
-              type="email"
               autoComplete="email"
               placeholder="email@email.com"
-              name="email"
-              required={true}
+              errorMessage={errors.email?.message}
             />
 
             <Field
+              {...register("password", {
+                required: {
+                  message: "Обязательное поле",
+                },
+                minLength: {
+                  value: 8,
+                  message: "Минимальная длина 8 символов",
+                },
+                maxLength: {
+                  value: 16,
+                  message: "Максимальная длина 16 символов",
+                },
+              })}
               label="Пароль"
-              onChange={handleChange}
               type="password"
               autoComplete="new-password"
-              name="password"
-              minLength="2"
-              maxLength="30"
               placeholder="password"
-              required={true}
+              errorMessage={errors.password?.message}
             />
           </div>
         </section>

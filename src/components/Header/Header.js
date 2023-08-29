@@ -19,7 +19,7 @@ const HeaderTab = ({ to, children, onClick }) => {
   );
 };
 
-const Header = ({ isLoggedIn }) => {
+const Header = ({ isLoggedIn, isAppLoading }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const matchMain = useMatch("/");
@@ -35,10 +35,10 @@ const Header = ({ isLoggedIn }) => {
     setIsMenuOpen(false);
   };
 
-  const showHeader =
+  const matchRoutes =
     matchMain || matchMovies || matchSavedMovies || matchProfile;
 
-  if (!showHeader) {
+  if (!matchRoutes || isAppLoading) {
     return null;
   }
 

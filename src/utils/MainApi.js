@@ -21,7 +21,6 @@ class Api {
       this._setToken(token);
       return this.getUserInfo()
         .then((user) => {
-          console.log(user);
           return user;
         })
         .catch((e) => Promise.reject(`Ошибка сохраненного токена: ${e}`));
@@ -38,7 +37,14 @@ class Api {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({ name, email, password }),
-    }).then(this._getResponseData);
+    }).then((res) => {
+      if (res.ok) {
+        return res.json().then((createdUser) => {
+          return createdUser;
+        });
+      }
+      return Promise.reject(res.json().then((err) => err));
+    });
   };
 
   login = (email, password) => {
@@ -56,7 +62,7 @@ class Api {
           })
           .catch((e) => console.log(e));
       }
-      return Promise.reject(`Ошибка входа: ${res.status}`);
+      return Promise.reject(res.json());
     });
   };
 
