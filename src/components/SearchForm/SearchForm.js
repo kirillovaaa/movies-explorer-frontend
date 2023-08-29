@@ -1,22 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import iconSearch from "../../images/icon-search.svg";
-import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
+import "./SearchForm.css";
 
-const SearchForm = () => {
-  const [filterEnabled, setFilterEnabled] = useState(false);
-
-  const handleToggleFilter = () => {
-    setFilterEnabled(!filterEnabled);
-  };
-
+const SearchForm = ({
+  search,
+  shortMovies,
+  onChangeSearch,
+  onToggleShortMovies,
+  onSubmit,
+}) => {
   return (
-    <form className="search-form">
+    <form className="search-form" onSubmit={onSubmit}>
       <div className="search-form__input-wrapper">
         <input
+          value={search}
+          onChange={onChangeSearch}
           className="search-form__input"
-          type="text"
-          name="password"
+          name="search"
           placeholder="Фильм"
           required={true}
         />
@@ -30,7 +31,10 @@ const SearchForm = () => {
         </button>
       </div>
 
-      <FilterCheckbox isEnabled={filterEnabled} onToggle={handleToggleFilter} />
+      <FilterCheckbox
+        value={shortMovies}
+        onCheck={() => onToggleShortMovies(!shortMovies)}
+      />
     </form>
   );
 };

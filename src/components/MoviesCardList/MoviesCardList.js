@@ -1,12 +1,14 @@
 import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import "./MoviesCardList.css";
+import Preloader from "../Preloader/Preloader";
 
 const MoviesCardList = ({
   movies,
+  isLoading,
   hasMoreMovies = false,
   onClickMore,
-  allowsRemove,
+  onlyRemove,
 }) => {
   return (
     <>
@@ -14,25 +16,25 @@ const MoviesCardList = ({
         {movies.map((m) => (
           <MoviesCard
             key={m.id}
-            imageSrc={m.imageSrc}
-            name={m.name}
-            description={m.description}
-            time={m.time}
+            {...m}
             isSaved={m.isSaved}
-            hasRemoveButton={allowsRemove}
+            hasRemoveButton={onlyRemove}
           />
         ))}
       </ul>
 
-      {hasMoreMovies && (
-        <button
-          type="button"
-          className="movies__more-button"
-          onClick={onClickMore}
-        >
-          Ещё
-        </button>
-      )}
+      {hasMoreMovies &&
+        (isLoading ? (
+          <Preloader />
+        ) : (
+          <button
+            type="button"
+            className="movies__more-button"
+            onClick={onClickMore}
+          >
+            Ещё
+          </button>
+        ))}
     </>
   );
 };

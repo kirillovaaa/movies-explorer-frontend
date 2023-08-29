@@ -3,16 +3,12 @@ import "./SavedMovies.css";
 // глобальные компоненты
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-// датасет
-import { moviesList } from "../Movies/Movies";
 
-const SavedMovies = () => {
-  const savedMoviesList = moviesList.filter((m) => m.isSaved === true);
-
+const SavedMovies = ({ movies }) => {
   return (
     <main className="movies movies_saved">
       <SearchForm />
-      <MoviesCardList movies={savedMoviesList} allowsRemove={true} />
+      <MoviesCardList movies={movies} onlyRemove={true} />
     </main>
   );
 };
