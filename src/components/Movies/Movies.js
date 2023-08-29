@@ -5,15 +5,17 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 import MoviesApi from "../../utils/MoviesApi";
+import usePageAmount from "../../utils/usePageAmount";
 
 const Movies = () => {
   const [search, setSearch] = useState("");
   const [shortMovies, setShortMovies] = useState(false);
-  const [pageLength, setPageLength] = useState(4);
 
   const [movies, setMovies] = useState(null);
   const [totalLength, setTotalLength] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+
+  const { initialAmount, nextPageAmount } = usePageAmount();
 
   useEffect(() => {
     const savedSearch = localStorage.getItem("recentSearch");
@@ -25,14 +27,6 @@ const Movies = () => {
       setTotalLength(json.totalLength);
     }
   }, []);
-
-  const searchMovies = async ({ from, amount, ...fields }) => {
-    return await MoviesApi.getMovies({
-      ...fields,
-      from,
-      amount,
-    });
-  };
 
   const updateLocalStorage = ({ search, shortMovies, movies, totalLength }) => {
     localStorage.setItem(
@@ -52,17 +46,17 @@ const Movies = () => {
       setMovies(null);
       setTotalLength(0);
       setIsLoading(true);
-      const result = await searchMovies({
+      const result = await MoviesApi.getMovies({
         search,
         shortMovies,
         from: 0,
-        amount: pageLength,
+        amount: initialAmount,
       });
       updateLocalStorage({
         search,
         shortMovies,
         movies: result.page,
-        totalLength,
+        totalLength: result.totalLength,
       });
       setMovies(result.page);
       setTotalLength(result.totalLength);
@@ -76,18 +70,18 @@ const Movies = () => {
   const handleClickMore = async () => {
     try {
       setIsLoading(true);
-      const result = await searchMovies({
+      const result = await MoviesApi.getMovies({
         search,
         shortMovies,
         from: movies.length,
-        amount: pageLength,
+        amount: nextPageAmount,
       });
       const newMovies = [...movies, ...result.page];
       updateLocalStorage({
         search,
         shortMovies,
         movies: newMovies,
-        totalLength,
+        totalLength: result.totalLength,
       });
       setMovies(newMovies);
       setTotalLength(result.totalLength);

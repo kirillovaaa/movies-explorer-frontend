@@ -14,7 +14,6 @@
 .movies__card-image {
   aspect-ratio: 1.784/1;
   width: 100%;
-  cursor: pointer;
 }
 
 .movies__card-description {
