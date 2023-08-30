@@ -12,6 +12,7 @@ const Profile = ({ onSubmit, onLogout }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
+    mode: "all",
     defaultValues: {
       name: currentUser.name,
       email: currentUser.email,
@@ -42,6 +43,7 @@ const Profile = ({ onSubmit, onLogout }) => {
               <input
                 {...register("name", {
                   required: {
+                    value: true,
                     message: "Обязательное поле",
                   },
                   minLength: {
@@ -67,11 +69,12 @@ const Profile = ({ onSubmit, onLogout }) => {
               <input
                 {...register("email", {
                   required: {
+                    value: true,
                     message: "Обязательное поле",
                   },
-                  minLength: {
-                    value: 6,
-                    message: "Минимальная длина 6 символов",
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "Укажите валидный e-mail адрес",
                   },
                 })}
                 className="profile__field-input"
@@ -84,6 +87,9 @@ const Profile = ({ onSubmit, onLogout }) => {
         </section>
 
         <div className="profile__buttons">
+          {errors.name && <span>Имя: {errors.name.message}</span>}
+          {errors.email && <span>Email: {errors.email.message}</span>}
+
           <button type="submit" className="profile__button">
             Редактировать
           </button>

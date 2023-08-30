@@ -1,34 +1,23 @@
+import getResponseData from "./getResponseData";
+
 class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._cachedMovies = null;
   }
 
-  _getResponseData = (res) => {
-    if (res.ok) {
-      return res.json().then((res) => res);
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  };
-
   _fetchMovies = async () => {
     if (!this._cachedMovies) {
-      try {
-        const res = await fetch(this._baseUrl);
-        const responseBody = await res.json();
-        if (res.ok) {
-          // return responseBody;
-          this._cachedMovies = responseBody;
-        } else {
-          throw Error({ status: res.status, ...responseBody });
-        }
-      } catch (e) {
-        throw Error(e);
-      }
+      this._cachedMovies = await getResponseData(this._baseUrl);
     }
+    // TODO: добавить имитацию ожидания, если кеширован
     return this._cachedMovies;
   };
 
+  /**
+   * Метод имитирует более сложный api с страницами, фильтрацией
+   * и сортировкой по умолчанию по полю "created_at"
+   */
   getMovies = async ({ search, shortMovies, from, amount }) => {
     const movies = await this._fetchMovies();
 

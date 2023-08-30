@@ -3,9 +3,10 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 // компоненты
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-// контекст
+// контексты
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 // роуты
+import SavedMoviesProvider from "../SavedMoviesProvider/SavedMoviesProvider";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
@@ -41,7 +42,6 @@ const App = () => {
       .finally(() => {
         setIsAppLoading(false);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -74,10 +74,8 @@ const App = () => {
       await MainApi.login(email, password);
       setIsLoggedIn(true);
       navigate("/", { replace: true });
-      return Promise.resolve();
     } catch (e) {
-      const err = await e;
-      return Promise.reject(err);
+      return Promise.reject(e);
     }
   };
 
@@ -86,77 +84,80 @@ const App = () => {
       await MainApi.register(name, email, password);
       navigate("/signin");
     } catch (e) {
-      const err = await e;
-      return Promise.reject(err);
+      return Promise.reject(e);
     }
   };
 
-  const handleEditProfile = ({ name, email }) => {
-    MainApi.setUserInfo(name, email)
-      .then((user) => {
-        setCurrentUser(user);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+  const handleEditProfile = async ({ name, email }) => {
+    try {
+      const user = await MainApi.setUserInfo(name, email);
+      setCurrentUser(user);
+    } catch (e) {
+      return Promise.reject(e);
+    }
   };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Header isLoggedIn={isLoggedIn} isAppLoading={isAppLoading} />
 
-      <Routes>
-        <Route path="/" element={<Main />} />
+      <SavedMoviesProvider>
+        <Routes>
+          <Route path="/" element={<Main />} />
 
-        <Route
-          path="/movies"
-          element={
-            <ProtectedRoute
-              isAppLoading={isAppLoading}
-              isLoggedIn={isLoggedIn}
-              element={<Movies />}
-            />
-          }
-        />
+          <Route
+            path="/movies"
+            element={
+              <ProtectedRoute
+                isAppLoading={isAppLoading}
+                isLoggedIn={isLoggedIn}
+                element={<Movies />}
+              />
+            }
+          />
 
-        <Route
-          path="/saved-movies"
-          element={
-            <ProtectedRoute
-              isAppLoading={isAppLoading}
-              isLoggedIn={isLoggedIn}
-              element={<SavedMovies />}
-            />
-          }
-        />
+          <Route
+            path="/saved-movies"
+            element={
+              <ProtectedRoute
+                isAppLoading={isAppLoading}
+                isLoggedIn={isLoggedIn}
+                element={<SavedMovies />}
+              />
+            }
+          />
 
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute
-              isAppLoading={isAppLoading}
-              isLoggedIn={isLoggedIn}
-              element={
-                <Profile onSubmit={handleEditProfile} onLogout={handleLogout} />
-              }
-            />
-          }
-        />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute
+                isAppLoading={isAppLoading}
+                isLoggedIn={isLoggedIn}
+                element={
+                  <Profile
+                    onSubmit={handleEditProfile}
+                    onLogout={handleLogout}
+                  />
+                }
+              />
+            }
+          />
 
-        <Route
-          path="/signin"
-          element={<Login onSubmit={handleLoginSubmit} />}
-        />
+          <Route
+            path="/signin"
+            element={<Login onSubmit={handleLoginSubmit} />}
+          />
 
-        <Route
-          path="/signup"
-          element={<Register onSubmit={handleRegisterSubmit} />}
-        />
+          <Route
+            path="/signup"
+            element={<Register onSubmit={handleRegisterSubmit} />}
+          />
 
-        <Route path="*" element={<Page404 />} />
-      </Routes>
+          <Route path="*" element={<Page404 />} />
+        </Routes>
 
-      <Footer isAppLoading={isAppLoading} />
+        <Footer isAppLoading={isAppLoading} />
+      </SavedMoviesProvider>
     </CurrentUserContext.Provider>
   );
 };

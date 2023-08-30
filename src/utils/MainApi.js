@@ -1,18 +1,14 @@
+import getResponseData from "./getResponseData";
+
 class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
+    this._cachedMovies = null;
   }
 
   _setToken = (token) => {
     this._headers.authorization = `Bearer ${token}`;
-  };
-
-  _getResponseData = (res) => {
-    if (res.ok) {
-      return res.json().then((res) => res);
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
   };
 
   authorize = () => {
@@ -32,67 +28,47 @@ class Api {
     localStorage.removeItem("token");
   };
 
-  register = (name, email, password) => {
-    return fetch(`${this._baseUrl}/signup`, {
+  register = async (name, email, password) => {
+    return await getResponseData(`${this._baseUrl}/signup`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({ name, email, password }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json().then((createdUser) => {
-          return createdUser;
-        });
-      }
-      return Promise.reject(res.json().then((err) => err));
     });
   };
 
-  login = (email, password) => {
-    return fetch(`${this._baseUrl}/signin`, {
-      method: "POST",
+  login = async (email, password) => {
+    try {
+      const res = await getResponseData(`${this._baseUrl}/signin`, {
+        method: "POST",
+        headers: this._headers,
+        body: JSON.stringify({ email, password }),
+      });
+      localStorage.setItem("token", res.token);
+      this._setToken(res.token);
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
+
+  getUserInfo = async () => {
+    return await getResponseData(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-      body: JSON.stringify({ email, password }),
-    }).then((res) => {
-      if (res.ok) {
-        return res
-          .json()
-          .then(({ token }) => {
-            localStorage.setItem("token", token);
-            this._setToken(token);
-          })
-          .catch((e) => console.log(e));
-      }
-      return Promise.reject(res.json());
     });
   };
 
-  getUserInfo = () => {
-    return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers,
-    }).then(this._getResponseData);
-  };
-
-  setUserInfo = (name, email) => {
-    return fetch(`${this._baseUrl}/users/me`, {
+  setUserInfo = async (name, email) => {
+    return await getResponseData(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({ name, email }),
-    }).then(this._getResponseData);
+    });
   };
 
-  //   getInitialCards = () => {
-  //     return fetch(`${this._baseUrl}/cards`, {
-  //       headers: this._headers,
-  //     }).then(this._getResponseData);
-  //   };
-
-  //   setUserAvatar = (avatarSrc) => {
-  //     return fetch(`${this._baseUrl}/users/me/avatar`, {
-  //       method: "PATCH",
-  //       headers: this._headers,
-  //       body: JSON.stringify({ avatar: avatarSrc }),
-  //     }).then(this._getResponseData);
-  //   };
+  getSavedMovies = async () => {
+    return await getResponseData(`${this._baseUrl}/movies`, {
+      headers: this._headers,
+    });
+  };
 
   //   addCard = (name, link) => {
   //     return fetch(`${this._baseUrl}/cards`, {
@@ -107,27 +83,6 @@ class Api {
   //       method: "DELETE",
   //       headers: this._headers,
   //     }).then(this._getResponseData);
-  //   };
-
-  //   addLike = (id) => {
-  //     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-  //       method: "PUT",
-  //       headers: this._headers,
-  //     }).then(this._getResponseData);
-  //   };
-
-  //   removeLike = (id) => {
-  //     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-  //       method: "DELETE",
-  //       headers: this._headers,
-  //     }).then(this._getResponseData);
-  //   };
-
-  //   changeLikeCardStatus = (id, toIsLiked) => {
-  //     if (toIsLiked) {
-  //       return this.addLike(id);
-  //     }
-  //     return this.removeLike(id);
   //   };
 }
 

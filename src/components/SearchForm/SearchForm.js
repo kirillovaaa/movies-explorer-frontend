@@ -7,7 +7,7 @@ const SearchForm = ({
   search,
   shortMovies,
   onChangeSearch,
-  onToggleShortMovies,
+  onToggleShort,
   onSubmit,
 }) => {
   return (
@@ -33,7 +33,7 @@ const SearchForm = ({
 
       <FilterCheckbox
         value={shortMovies}
-        onCheck={() => onToggleShortMovies(!shortMovies)}
+        onCheck={() => onToggleShort(!shortMovies)}
       />
     </form>
   );

@@ -1,15 +1,20 @@
-import React from "react";
-import MoviesCard from "../MoviesCard/MoviesCard";
+import React, { useContext } from "react";
 import "./MoviesCardList.css";
+// компоненты
+import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
+// контексты
+import SavedMoviesContext from "../../contexts/SavedMoviesContext";
 
 const MoviesCardList = ({
   movies,
-  isLoading,
+  isLoading = false,
   hasMoreMovies = false,
   onClickMore,
-  onlyRemove,
+  onlyRemove = false,
 }) => {
+  const [savedMovies] = useContext(SavedMoviesContext);
+
   return (
     <>
       <ul className="movies__card-list">
@@ -17,7 +22,7 @@ const MoviesCardList = ({
           <MoviesCard
             key={m.id}
             {...m}
-            isSaved={m.isSaved}
+            isSaved={savedMovies.find((sm) => sm.id === m.id)}
             hasRemoveButton={onlyRemove}
           />
         ))}

@@ -12,6 +12,7 @@ const Login = ({ onSubmit }) => {
     setError,
     formState: { errors },
   } = useForm({
+    mode: "all",
     defaultValues: {
       email: "",
       password: "",
@@ -44,11 +45,8 @@ const Login = ({ onSubmit }) => {
             <Field
               {...register("email", {
                 required: {
+                  value: true,
                   message: "Обязательное поле",
-                },
-                minLength: {
-                  value: 8,
-                  message: "Минимальная длина 8 символов",
                 },
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -64,6 +62,7 @@ const Login = ({ onSubmit }) => {
             <Field
               {...register("password", {
                 required: {
+                  value: true,
                   message: "Обязательное поле",
                 },
                 minLength: {

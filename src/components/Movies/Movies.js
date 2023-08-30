@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./Movies.css";
-// глобальные компоненты
+// компоненты
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
+// утилиты
 import MoviesApi from "../../utils/MoviesApi";
 import usePageAmount from "../../utils/usePageAmount";
 
@@ -106,7 +107,7 @@ const Movies = () => {
         search={search}
         shortMovies={shortMovies}
         onChangeSearch={handleChangeSearch}
-        onToggleShortMovies={handleToggleShort}
+        onToggleShort={handleToggleShort}
         onSubmit={handleSearch}
       />
 
