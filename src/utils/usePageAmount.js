@@ -10,7 +10,7 @@ const usePageAmount = () => {
     let initialAmount = 16;
     let nextPageAmount = 4;
 
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth <= 1280) {
       initialAmount = 8;
       nextPageAmount = 2;
     }

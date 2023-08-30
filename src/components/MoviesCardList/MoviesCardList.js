@@ -20,7 +20,7 @@ const MoviesCardList = ({
       <ul className="movies__card-list">
         {movies.map((m) => (
           <MoviesCard
-            key={m.id}
+            key={m.id || m._id}
             {...m}
             isSaved={savedMovies.find((sm) => sm.id === m.id)}
             hasRemoveButton={onlyRemove}
