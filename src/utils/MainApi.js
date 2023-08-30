@@ -18,10 +18,8 @@ class Api {
       try {
         return await this.getUserInfo();
       } catch (e) {
-        if (e.status === 401) {
-          this.logout();
-        }
-        Promise.reject(e);
+        this.logout();
+        return Promise.reject(e);
       }
     }
     return Promise.reject(`Токен не найден в локальном хранилище`);
