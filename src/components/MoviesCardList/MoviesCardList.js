@@ -15,6 +15,10 @@ const MoviesCardList = ({
 }) => {
   const [savedMovies] = useContext(SavedMoviesContext);
 
+  if (movies.length === 0) {
+    return <span>По вашему запросу фильмов нет</span>;
+  }
+
   return (
     <>
       <ul className="movies__card-list">
