@@ -11,15 +11,18 @@ class Api {
     this._headers.authorization = `Bearer ${token}`;
   };
 
-  authorize = () => {
+  authorize = async () => {
     const token = localStorage.getItem("token");
     if (token) {
       this._setToken(token);
-      return this.getUserInfo()
-        .then((user) => {
-          return user;
-        })
-        .catch((e) => Promise.reject(`Ошибка сохраненного токена: ${e}`));
+      try {
+        return await this.getUserInfo();
+      } catch (e) {
+        if (e.status === 401) {
+          this.logout();
+        }
+        Promise.reject(e);
+      }
     }
     return Promise.reject(`Токен не найден в локальном хранилище`);
   };
