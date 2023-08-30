@@ -23,7 +23,9 @@ const SavedMovies = () => {
         setMovies(movies);
       })
       .catch((e) => {
-        console.log(e);
+        if (e.status === 404) {
+          setMovies(null);
+        }
       })
       .finally(() => {
         setIsLoading(false);
@@ -34,7 +36,7 @@ const SavedMovies = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
-      setMovies(null);
+      setMovies([]);
       setIsLoading(true);
       const result = await MainApi.getSavedMovies({ search, shortMovies });
       setMovies(result);
@@ -63,9 +65,11 @@ const SavedMovies = () => {
         onSubmit={handleSearch}
       />
 
-      {!movies && isLoading && <Preloader />}
-
-      {movies && <MoviesCardList movies={movies} onlyRemove={true} />}
+      {isLoading ? (
+        <Preloader />
+      ) : movies ? (
+        <MoviesCardList movies={movies} onlyRemove={true} />
+      ) : null}
     </main>
   );
 };

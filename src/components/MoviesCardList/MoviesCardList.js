@@ -1,20 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./MoviesCardList.css";
 // компоненты
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
-// контексты
-import SavedMoviesContext from "../../contexts/SavedMoviesContext";
 
 const MoviesCardList = ({
   movies,
+  savedItems,
   isLoading = false,
   hasMoreMovies = false,
   onClickMore,
   onlyRemove = false,
 }) => {
-  const [savedMovies] = useContext(SavedMoviesContext);
-
   if (movies.length === 0) {
     return <span>По вашему запросу фильмов нет</span>;
   }
@@ -26,7 +23,7 @@ const MoviesCardList = ({
           <MoviesCard
             key={m.id || m._id}
             {...m}
-            isSaved={savedMovies.find((sm) => sm.id === m.id)}
+            isSaved={savedItems?.find((s) => s === m.id)}
             hasRemoveButton={onlyRemove}
           />
         ))}
