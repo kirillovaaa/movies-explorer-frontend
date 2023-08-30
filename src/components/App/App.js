@@ -67,6 +67,7 @@ const App = () => {
     MainApi.logout();
     setIsLoggedIn(false);
     setCurrentUser(defaultUser);
+    localStorage.removeItem("recentSearch");
   };
 
   const handleLoginSubmit = async ({ email, password }) => {
