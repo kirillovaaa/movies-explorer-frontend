@@ -1,3 +1,4 @@
+import filterMovies from "./filterMovies";
 import getResponseData from "./getResponseData";
 
 class Api {
@@ -65,26 +66,39 @@ class Api {
     });
   };
 
-  getSavedMovies = async () => {
+  _fetchMovies = async () => {
+    if (!this._cachedMovies) {
+      this._cachedMovies = await getResponseData(`${this._baseUrl}/movies`, {
+        headers: this._headers,
+      });
+    }
+    // TODO: добавить имитацию ожидания, если кеширован
+    return this._cachedMovies;
+  };
+
+  getSavedMovies = async ({ initialize, search, shortMovies }) => {
+    if (initialize) {
+      this._cachedMovies = null;
+    }
+    const movies = await this._fetchMovies();
+    const filtered = filterMovies(movies, { search, shortMovies });
+    return filtered;
+  };
+
+  addCard = async (card) => {
     return await getResponseData(`${this._baseUrl}/movies`, {
+      method: "POST",
       headers: this._headers,
+      body: JSON.stringify({ ...card }),
     });
   };
 
-  //   addCard = (name, link) => {
-  //     return fetch(`${this._baseUrl}/cards`, {
-  //       method: "POST",
-  //       headers: this._headers,
-  //       body: JSON.stringify({ name, link }),
-  //     }).then(this._getResponseData);
-  //   };
-
-  //   removeCard = (id) => {
-  //     return fetch(`${this._baseUrl}/cards/${id}`, {
-  //       method: "DELETE",
-  //       headers: this._headers,
-  //     }).then(this._getResponseData);
-  //   };
+  removeCard = async (id) => {
+    return await getResponseData(`${this._baseUrl}/movies/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
+    });
+  };
 }
 
 const api = new Api({

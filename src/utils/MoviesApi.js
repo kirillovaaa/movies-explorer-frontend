@@ -1,4 +1,5 @@
 import getResponseData from "./getResponseData";
+import filterMovies from "./filterMovies";
 
 class Api {
   constructor(options) {
@@ -20,20 +21,7 @@ class Api {
    */
   getMovies = async ({ search, shortMovies, from, amount }) => {
     const movies = await this._fetchMovies();
-
-    const filtered = movies.filter((movie) => {
-      const fitsByName =
-        movie.nameRU.toLowerCase().includes(search.toLowerCase()) ||
-        movie.nameEN.toLowerCase().includes(search.toLowerCase());
-
-      const isShortMovie = movie.duration <= 40;
-
-      return (
-        fitsByName &&
-        ((shortMovies && isShortMovie) || (!shortMovies && !isShortMovie))
-      );
-    });
-
+    const filtered = filterMovies(movies, { search, shortMovies });
     const sorted = new Array(...filtered).sort(
       (a, b) => new Date(b.created_at) - new Date(a.created_at)
     );

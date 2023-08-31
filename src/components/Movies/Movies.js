@@ -1,14 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Movies.css";
 // компоненты
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
-// контексты
-import SavedMoviesContext from "../../contexts/SavedMoviesContext";
-// утилиты
 import MoviesApi from "../../utils/MoviesApi";
 import usePageAmount from "../../utils/usePageAmount";
+// утилиты
+import useSavedMovies from "../../utils/useSavedMovies";
 
 const Movies = () => {
   const [search, setSearch] = useState("");
@@ -18,7 +17,7 @@ const Movies = () => {
   const [totalLength, setTotalLength] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [savedMovies] = useContext(SavedMoviesContext);
+  const { savedMovies, addSavedMovie, removeSavedMovie } = useSavedMovies();
 
   const { initialAmount, nextPageAmount } = usePageAmount();
 
@@ -120,10 +119,12 @@ const Movies = () => {
       ) : (
         <MoviesCardList
           movies={movies}
-          savedItems={savedMovies}
+          savedMovies={savedMovies}
           isLoading={isLoading}
           hasMoreMovies={movies.length < totalLength}
           onClickMore={handleClickMore}
+          onCardAdd={addSavedMovie}
+          onCardRemove={removeSavedMovie}
         />
       )}
     </main>
