@@ -5,6 +5,7 @@ import "./SearchForm.css";
 
 const SearchForm = ({
   search,
+  isSearchRequired = true,
   shortMovies,
   onChangeSearch,
   onToggleShort,
@@ -19,7 +20,7 @@ const SearchForm = ({
           className="search-form__input"
           name="search"
           placeholder="Фильм"
-          required={true}
+          required={isSearchRequired}
         />
 
         <button type="submit" className="search-form__button-search">

@@ -18,7 +18,7 @@ const SavedMovies = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    MainApi.getSavedMovies({ initialize: true })
+    MainApi.getSavedMovies({ initialize: true, search, shortMovies })
       .then((movies) => {
         setSavedMovies(movies);
       })
@@ -33,8 +33,6 @@ const SavedMovies = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // TODO:
-  // - сделать имитацию поиска
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
@@ -61,6 +59,7 @@ const SavedMovies = () => {
     <main className="movies movies_saved">
       <SearchForm
         search={search}
+        isSearchRequired={false}
         shortMovies={shortMovies}
         onChangeSearch={handleChangeSearch}
         onToggleShort={handleToggleShort}

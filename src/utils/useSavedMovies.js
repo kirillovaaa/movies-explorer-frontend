@@ -20,9 +20,9 @@ const useSavedMovies = () => {
       trailerLink: movie.trailerLink,
     };
     try {
-      await MainApi.addCard(newCard);
+      const res = await MainApi.addCard(newCard);
       const prevSavedMovies = savedMovies ? [...savedMovies] : [];
-      setSavedMovies([newCard, ...prevSavedMovies]);
+      setSavedMovies([res, ...prevSavedMovies]);
     } catch (e) {
       console.log(e);
     }
@@ -34,9 +34,9 @@ const useSavedMovies = () => {
     );
 
     try {
-      const rm = await MainApi.removeCard(movieItem._id);
+      const res = await MainApi.removeCard(movieItem._id);
       const newSavedMovies = savedMovies.filter(
-        (sm) => sm.movieId !== rm.movieId
+        (sm) => sm.movieId !== res.movieId
       );
       setSavedMovies(newSavedMovies);
     } catch (e) {
