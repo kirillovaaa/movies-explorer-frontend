@@ -65,6 +65,20 @@
   gap: 16px;
 }
 
+.profile__errors-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  gap: 8px;
+}
+
+.profile__error {
+  font-size: 11px;
+  line-height: 13px;
+  color: #ff004c;
+  text-align: center;
+}
+
 .profile__button {
   font-size: 12px;
   line-height: 15px;
@@ -74,10 +88,15 @@
   background: none;
   color: black;
   transition: opacity 0.1s ease-in-out;
+  cursor: pointer;
+}
+.profile__button:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
 }
 .profile__button:hover {
   opacity: 0.7;
-  cursor: pointer;
 }
 
 .profile__button_destructive {

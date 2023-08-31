@@ -10,6 +10,8 @@ const Profile = ({ onSubmit, onLogout }) => {
   const {
     register,
     handleSubmit,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useForm({
     mode: "all",
@@ -21,6 +23,13 @@ const Profile = ({ onSubmit, onLogout }) => {
 
   const navigate = useNavigate();
 
+  const handleChangeWithReset = (e) => {
+    if (errors.root) {
+      clearErrors("root");
+    }
+    return e.target.value;
+  };
+
   const handleClickLogout = () => {
     navigate("/signin");
     onLogout();
@@ -30,8 +39,14 @@ const Profile = ({ onSubmit, onLogout }) => {
     <main className="profile">
       <form
         className="profile__form"
-        onSubmit={handleSubmit((data) => {
-          onSubmit(data);
+        onSubmit={handleSubmit(async (data) => {
+          try {
+            await onSubmit(data);
+          } catch (e) {
+            setError("root", {
+              message: "При обновлении профиля произошла ошибка",
+            });
+          }
         })}
       >
         <section className="profile__top">
@@ -42,6 +57,7 @@ const Profile = ({ onSubmit, onLogout }) => {
               <span>Имя</span>
               <input
                 {...register("name", {
+                  onChange: handleChangeWithReset,
                   required: {
                     value: true,
                     message: "Обязательное поле",
@@ -68,6 +84,7 @@ const Profile = ({ onSubmit, onLogout }) => {
               <span>E-mail</span>
               <input
                 {...register("email", {
+                  onChange: handleChangeWithReset,
                   required: {
                     value: true,
                     message: "Обязательное поле",
@@ -87,10 +104,29 @@ const Profile = ({ onSubmit, onLogout }) => {
         </section>
 
         <div className="profile__buttons">
-          {errors.name && <span>Имя: {errors.name.message}</span>}
-          {errors.email && <span>Email: {errors.email.message}</span>}
+          {(errors.name || errors.email || errors.root) && (
+            <div className="profile__errors-wrapper">
+              {errors.name && (
+                <span className="profile__error">
+                  Имя: {errors.name.message}
+                </span>
+              )}
+              {errors.email && (
+                <span className="profile__error">
+                  Email: {errors.email.message}
+                </span>
+              )}
+              {errors.root && (
+                <span className="profile__error">{errors.root.message}</span>
+              )}
+            </div>
+          )}
 
-          <button type="submit" className="profile__button">
+          <button
+            type="submit"
+            className="profile__button"
+            disabled={!!errors.name || !!errors.email}
+          >
             Редактировать
           </button>
 
