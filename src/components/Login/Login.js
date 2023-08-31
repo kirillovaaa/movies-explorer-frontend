@@ -10,7 +10,8 @@ const Login = ({ onSubmit }) => {
     register,
     handleSubmit,
     setError,
-    formState: { errors },
+    clearErrors,
+    formState: { errors, isValid },
   } = useForm({
     mode: "all",
     defaultValues: {
@@ -19,18 +20,23 @@ const Login = ({ onSubmit }) => {
     },
   });
 
+  const handleChangeWithReset = (e) => {
+    if (errors.root) {
+      clearErrors("root");
+    }
+    return e.target.value;
+  };
+
   return (
     <main className="auth">
       <form
         className="auth__form"
-        onSubmit={handleSubmit((data) => {
-          onSubmit(data).catch((e) => {
-            if (e.message.includes("email")) {
-              setError("email", { message: e.message });
-            } else {
-              setError("password", { message: e.message });
-            }
-          });
+        onSubmit={handleSubmit(async (data) => {
+          try {
+            await onSubmit(data);
+          } catch (e) {
+            setError("root", { message: e.message });
+          }
         })}
       >
         <section className="auth__top">
@@ -44,6 +50,7 @@ const Login = ({ onSubmit }) => {
           <div className="auth__fields">
             <Field
               {...register("email", {
+                onChange: handleChangeWithReset,
                 required: {
                   value: true,
                   message: "Обязательное поле",
@@ -61,6 +68,7 @@ const Login = ({ onSubmit }) => {
 
             <Field
               {...register("password", {
+                onChange: handleChangeWithReset,
                 required: {
                   value: true,
                   message: "Обязательное поле",
@@ -84,7 +92,11 @@ const Login = ({ onSubmit }) => {
         </section>
 
         <div className="auth__footer">
-          <button type="submit" className="auth__button">
+          {errors.root && (
+            <span className="auth__error">{errors.root.message}</span>
+          )}
+
+          <button type="submit" className="auth__button" disabled={!isValid}>
             Войти
           </button>
 
