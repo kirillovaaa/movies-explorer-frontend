@@ -31,9 +31,7 @@
   font-size: 13px;
   line-height: 18px;
   text-decoration: none;
-}
-.header__tab:visited {
-  color: inherit;
+  color: black;
 }
 .header__tab_active {
   font-weight: 500;
