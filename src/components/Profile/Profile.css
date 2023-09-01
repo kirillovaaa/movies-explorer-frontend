@@ -65,18 +65,20 @@
   gap: 16px;
 }
 
-.profile__errors-wrapper {
+.profile__messages-wrapper {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
   gap: 8px;
 }
 
-.profile__error {
+.profile__message {
   font-size: 11px;
   line-height: 13px;
-  color: #ff004c;
   text-align: center;
+}
+.profile__message_error {
+  color: #ff004c;
 }
 
 .profile__button {

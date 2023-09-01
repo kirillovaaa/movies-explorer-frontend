@@ -1,9 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./Profile.css";
 
 const Profile = ({ onSubmit, onLogout }) => {
+  const [isSuccess, setIsSuccess] = useState(false);
+
   const currentUser = useContext(CurrentUserContext);
 
   const {
@@ -36,6 +38,9 @@ const Profile = ({ onSubmit, onLogout }) => {
   };
 
   const handleChangeWithReset = (e) => {
+    if (isSuccess) {
+      setIsSuccess(false);
+    }
     if (errors.response) {
       clearErrors("response");
     }
@@ -50,6 +55,7 @@ const Profile = ({ onSubmit, onLogout }) => {
         onSubmit={handleSubmit(async (data) => {
           try {
             await onSubmit(data);
+            setIsSuccess(true);
           } catch (e) {
             setError("response", {
               message: "При обновлении профиля произошла ошибка",
@@ -112,17 +118,24 @@ const Profile = ({ onSubmit, onLogout }) => {
         </section>
 
         <div className="profile__buttons">
-          <div className="profile__errors-wrapper">
+          <div className="profile__messages-wrapper">
+            {isSuccess && (
+              <span className="profile__message">Данные успешно обновлены</span>
+            )}
             {errors.name?.message && (
-              <span className="profile__error">Имя: {errors.name.message}</span>
+              <span className="profile__message profile__message_error">
+                Имя: {errors.name.message}
+              </span>
             )}
             {errors.email?.message && (
-              <span className="profile__error">
+              <span className="profile__message profile__message_error">
                 Email: {errors.email.message}
               </span>
             )}
             {errors.response?.message && (
-              <span className="profile__error">{errors.response.message}</span>
+              <span className="profile__message profile__message_error">
+                {errors.response.message}
+              </span>
             )}
           </div>
 
