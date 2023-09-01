@@ -74,7 +74,7 @@ const App = () => {
     try {
       await MainApi.login(email, password);
       setIsLoggedIn(true);
-      navigate("/", { replace: true });
+      navigate("/movies", { replace: true });
     } catch (e) {
       return Promise.reject(e);
     }
