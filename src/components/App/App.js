@@ -83,7 +83,7 @@ const App = () => {
   const handleRegisterSubmit = async ({ name, email, password }) => {
     try {
       await MainApi.register(name, email, password);
-      navigate("/signin");
+      await handleLoginSubmit({ email, password });
     } catch (e) {
       return Promise.reject(e);
     }
