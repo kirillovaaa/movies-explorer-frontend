@@ -8,11 +8,9 @@
 .header_blue {
   background-color: #465dff;
 }
-.header_blue .header__menu-button {
-  filter: invert(1);
-}
+.header_blue .header__menu-button,
 .header_blue .header__tab {
-  color: #ffffff;
+  filter: invert(1);
 }
 
 .header__logo {
@@ -34,14 +32,14 @@
   line-height: 18px;
   text-decoration: none;
 }
-.header__tab:hover {
-  opacity: 0.7;
-}
 .header__tab:visited {
   color: inherit;
 }
 .header__tab_active {
   font-weight: 500;
+}
+.header__tab:hover {
+  opacity: 0.7;
 }
 
 .header__right {

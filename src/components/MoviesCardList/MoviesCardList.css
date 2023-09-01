@@ -1,3 +1,11 @@
+.movies__card-list-empty {
+  display: block;
+  font-size: 17px;
+  line-height: 22px;
+  margin-top: 20px;
+  text-align: center;
+}
+
 .movies__card-list {
   display: grid;
   justify-content: center;

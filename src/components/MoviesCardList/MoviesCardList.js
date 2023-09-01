@@ -15,7 +15,11 @@ const MoviesCardList = ({
   onCardRemove,
 }) => {
   if (movies.length === 0) {
-    return <span>По вашему запросу фильмов нет</span>;
+    return (
+      <span className="movies__card-list-empty">
+        По вашему запросу фильмов нет
+      </span>
+    );
   }
 
   return (
