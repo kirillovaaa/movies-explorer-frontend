@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./Profile.css";
@@ -11,6 +11,7 @@ const Profile = ({ onSubmit, onLogout }) => {
     handleSubmit,
     setError,
     clearErrors,
+    getValues,
     formState: { errors },
   } = useForm({
     mode: "all",
@@ -20,10 +21,25 @@ const Profile = ({ onSubmit, onLogout }) => {
     },
   });
 
-  const handleChangeWithReset = (e) => {
-    if (errors.root) {
+  useEffect(() => {
+    checkValidity();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser]);
+
+  const checkValidity = () => {
+    const { name, email } = getValues();
+    if (name === currentUser.name && email === currentUser.email) {
+      setError("root", { message: "Форма не заполнена" });
+    } else {
       clearErrors("root");
     }
+  };
+
+  const handleChangeWithReset = (e) => {
+    if (errors.response) {
+      clearErrors("response");
+    }
+    checkValidity();
     return e.target.value;
   };
 
@@ -35,7 +51,7 @@ const Profile = ({ onSubmit, onLogout }) => {
           try {
             await onSubmit(data);
           } catch (e) {
-            setError("root", {
+            setError("response", {
               message: "При обновлении профиля произошла ошибка",
             });
           }
@@ -96,28 +112,26 @@ const Profile = ({ onSubmit, onLogout }) => {
         </section>
 
         <div className="profile__buttons">
-          {(errors.name || errors.email || errors.root) && (
-            <div className="profile__errors-wrapper">
-              {errors.name && (
-                <span className="profile__error">
-                  Имя: {errors.name.message}
-                </span>
-              )}
-              {errors.email && (
-                <span className="profile__error">
-                  Email: {errors.email.message}
-                </span>
-              )}
-              {errors.root && (
-                <span className="profile__error">{errors.root.message}</span>
-              )}
-            </div>
-          )}
+          <div className="profile__errors-wrapper">
+            {errors.name?.message && (
+              <span className="profile__error">Имя: {errors.name.message}</span>
+            )}
+            {errors.email?.message && (
+              <span className="profile__error">
+                Email: {errors.email.message}
+              </span>
+            )}
+            {errors.response?.message && (
+              <span className="profile__error">{errors.response.message}</span>
+            )}
+          </div>
 
           <button
             type="submit"
             className="profile__button"
-            disabled={!!errors.name || !!errors.email}
+            disabled={
+              errors.email || errors.name || errors.root || errors.response
+            }
           >
             Редактировать
           </button>
