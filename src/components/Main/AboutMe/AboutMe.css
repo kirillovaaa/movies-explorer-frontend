@@ -1,0 +1,131 @@
+.about-me {
+  padding: 70px 14px;
+}
+
+.about-me__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.about-me__wrapper-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-me__title {
+  margin: 40px 0 20px;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 36px;
+  letter-spacing: -1.2px;
+}
+
+.about-me__subtitle {
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+  margin: 0 0 20px;
+}
+
+.about-me__description {
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 400;
+  max-width: 600px;
+  margin: 0;
+}
+
+.about-me__git-link {
+  margin-top: 40px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-decoration-line: none;
+  color: black;
+  max-width: 46px;
+  text-align: center;
+}
+.about-me__git-link:hover {
+  opacity: 0.7;
+}
+
+.about-me__avatar {
+  display: flex;
+  aspect-ratio: 1/1.2;
+  max-width: 292px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 60px;
+  order: -1;
+}
+
+@media screen and (min-width: 768px) {
+  .about-me {
+    padding: 90px 50px 90px;
+  }
+
+  .about-me__git-link {
+    margin-top: 87px;
+  }
+
+  .about-me__wrapper {
+    flex-direction: row;
+    gap: 50px;
+  }
+
+  .about-me__avatar {
+    order: 1;
+    max-width: 255px;
+    margin-top: 66px;
+  }
+
+  .about-me__title {
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: -1.6px;
+    margin: 66px 0 16px;
+  }
+
+  .about-me__subtitle {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__description {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .about-me {
+    padding: 110px 70px 100px;
+  }
+
+  .about-me__avatar {
+    max-width: 270px;
+  }
+
+  .about-me__title {
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -2px;
+    margin: 66px 0 18px;
+  }
+
+  .about-me__subtitle {
+    font-size: 18px;
+    line-height: 20px;
+    margin-bottom: 26px;
+  }
+
+  .about-me__description {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .about-me__git-link {
+    margin-top: 100px;
+  }
+}

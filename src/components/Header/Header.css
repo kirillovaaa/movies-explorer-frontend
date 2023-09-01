@@ -1,0 +1,148 @@
+.header {
+  position: relative;
+  display: flex;
+  height: 74px;
+  justify-content: center;
+  align-items: center;
+}
+.header_blue {
+  background-color: #465dff;
+}
+
+.header__logo {
+  position: absolute;
+  top: 18px;
+  left: 14px;
+}
+.header__logo:hover {
+  opacity: 0.7;
+}
+
+.header__tabs {
+  display: none;
+  gap: 16px;
+}
+
+.header__tab {
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+}
+.header__tab:hover {
+  opacity: 0.7;
+}
+.header__tab:visited {
+  color: inherit;
+}
+.header__tab_active {
+  font-weight: 500;
+}
+
+.header__right {
+  position: absolute;
+  top: 0;
+  right: 14px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.header__auth-button {
+  color: #ffffff;
+  background-color: transparent;
+  font-size: 10px;
+  line-height: 16px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border: none;
+  border-radius: 3px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.1s ease-in-out;
+}
+.header__auth-button_primary {
+  background-color: #2be080;
+  color: #000000;
+}
+.header__auth-button:hover {
+  opacity: 0.7;
+}
+
+.header__profile-button {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  width: 100px;
+  height: 32px;
+  border-radius: 16px;
+  background-color: #f9f9f9;
+  color: #000000;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.1s ease-in-out;
+}
+.header__profile-button:hover {
+  opacity: 0.7;
+}
+
+.header__menu-button {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  transition: opacity 0.1s ease-in-out;
+}
+.header__menu-button:hover {
+  opacity: 0.7;
+}
+
+@media screen and (min-width: 768px) {
+  .header__logo {
+    left: 30px;
+  }
+
+  .header__right {
+    right: 30px;
+    gap: 10px;
+  }
+
+  .header__auth-button {
+    font-size: 12px;
+    line-height: 16px;
+    padding: 8px 20px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .header__tabs {
+    display: flex;
+  }
+
+  .header__menu-button {
+    display: none;
+  }
+
+  .header__profile-button {
+    display: inline-flex;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .header__logo {
+    left: 70px;
+  }
+
+  .header__right {
+    right: 70px;
+  }
+}
