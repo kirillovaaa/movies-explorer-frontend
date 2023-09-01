@@ -17,6 +17,7 @@ import Register from "../Register/Register";
 import Page404 from "../Page404/Page404";
 // утилиты
 import MainApi from "../../utils/MainApi";
+import AuthRoute from "../AuthRoute/AuthRoute";
 
 const defaultUser = {
   _id: "",
@@ -147,12 +148,24 @@ const App = () => {
 
           <Route
             path="/signin"
-            element={<Login onSubmit={handleLoginSubmit} />}
+            element={
+              <AuthRoute
+                isAppLoading={isAppLoading}
+                isLoggedIn={isLoggedIn}
+                element={<Login onSubmit={handleLoginSubmit} />}
+              />
+            }
           />
 
           <Route
             path="/signup"
-            element={<Register onSubmit={handleRegisterSubmit} />}
+            element={
+              <AuthRoute
+                isAppLoading={isAppLoading}
+                isLoggedIn={isLoggedIn}
+                element={<Register onSubmit={handleRegisterSubmit} />}
+              />
+            }
           />
 
           <Route path="*" element={<Page404 />} />

@@ -1,8 +1,8 @@
 import { Navigate } from "react-router-dom";
 import Preloader from "../Preloader/Preloader";
-import "./ProtectedRoute.css";
+import "../ProtectedRoute/ProtectedRoute.css";
 
-const ProtectedRoute = ({ element: Component, isLoggedIn, isAppLoading }) => {
+const AuthRoute = ({ element: Component, isLoggedIn, isAppLoading }) => {
   if (isAppLoading) {
     return (
       <div className="preloader-wrapper">
@@ -11,10 +11,10 @@ const ProtectedRoute = ({ element: Component, isLoggedIn, isAppLoading }) => {
     );
   }
 
-  if (!isLoggedIn) {
-    return <Navigate to="/signin" replace={true} />;
+  if (isLoggedIn) {
+    return <Navigate to="/" replace={true} />;
   }
   return Component;
 };
 
-export default ProtectedRoute;
+export default AuthRoute;
