@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./Profile.css";
 
@@ -21,18 +20,11 @@ const Profile = ({ onSubmit, onLogout }) => {
     },
   });
 
-  const navigate = useNavigate();
-
   const handleChangeWithReset = (e) => {
     if (errors.root) {
       clearErrors("root");
     }
     return e.target.value;
-  };
-
-  const handleClickLogout = () => {
-    navigate("/signin");
-    onLogout();
   };
 
   return (
@@ -133,7 +125,7 @@ const Profile = ({ onSubmit, onLogout }) => {
           <button
             type="button"
             className="profile__button profile__button_destructive"
-            onClick={handleClickLogout}
+            onClick={onLogout}
           >
             Выйти из аккаунта
           </button>

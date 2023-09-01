@@ -68,6 +68,7 @@ const App = () => {
     setIsLoggedIn(false);
     setCurrentUser(defaultUser);
     localStorage.removeItem("recentSearch");
+    navigate("/");
   };
 
   const handleLoginSubmit = async ({ email, password }) => {
