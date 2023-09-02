@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./Profile.css";
 
 const Profile = ({ onSubmit, onLogout }) => {
-  const [isSuccess, setIsSuccess] = useState(false);
-
   const currentUser = useContext(CurrentUserContext);
 
   const {
@@ -14,7 +12,8 @@ const Profile = ({ onSubmit, onLogout }) => {
     setError,
     clearErrors,
     getValues,
-    formState: { errors },
+    reset,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm({
     mode: "all",
     defaultValues: {
@@ -38,8 +37,8 @@ const Profile = ({ onSubmit, onLogout }) => {
   };
 
   const handleChangeWithReset = (e) => {
-    if (isSuccess) {
-      setIsSuccess(false);
+    if (isSubmitSuccessful) {
+      reset({}, { keepValues: true });
     }
     if (errors.response) {
       clearErrors("response");
@@ -53,9 +52,9 @@ const Profile = ({ onSubmit, onLogout }) => {
       <form
         className="profile__form"
         onSubmit={handleSubmit(async (data) => {
+          document.activeElement.blur();
           try {
             await onSubmit(data);
-            setIsSuccess(true);
           } catch (e) {
             setError("response", {
               message: "При обновлении профиля произошла ошибка",
@@ -73,7 +72,7 @@ const Profile = ({ onSubmit, onLogout }) => {
                 {...register("name", {
                   onChange: handleChangeWithReset,
                   required: {
-                    value: true,
+                    value: !isSubmitting,
                     message: "Обязательное поле",
                   },
                   minLength: {
@@ -87,6 +86,7 @@ const Profile = ({ onSubmit, onLogout }) => {
                 })}
                 className="profile__field-input"
                 type="text"
+                disabled={isSubmitting}
                 autoComplete="name"
                 placeholder="Имя"
               />
@@ -100,7 +100,7 @@ const Profile = ({ onSubmit, onLogout }) => {
                 {...register("email", {
                   onChange: handleChangeWithReset,
                   required: {
-                    value: true,
+                    value: !isSubmitting,
                     message: "Обязательное поле",
                   },
                   pattern: {
@@ -110,6 +110,7 @@ const Profile = ({ onSubmit, onLogout }) => {
                 })}
                 className="profile__field-input"
                 type="text"
+                disabled={isSubmitting}
                 autoComplete="email"
                 placeholder="email@email.com"
               />
@@ -119,7 +120,7 @@ const Profile = ({ onSubmit, onLogout }) => {
 
         <div className="profile__buttons">
           <div className="profile__messages-wrapper">
-            {isSuccess && (
+            {isSubmitSuccessful && (
               <span className="profile__message">Данные успешно обновлены</span>
             )}
             {errors.name?.message && (
@@ -143,7 +144,11 @@ const Profile = ({ onSubmit, onLogout }) => {
             type="submit"
             className="profile__button"
             disabled={
-              errors.email || errors.name || errors.root || errors.response
+              errors.email ||
+              errors.name ||
+              errors.root ||
+              errors.response ||
+              isSubmitting
             }
           >
             Редактировать

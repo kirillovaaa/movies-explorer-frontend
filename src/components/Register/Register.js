@@ -13,7 +13,7 @@ const Register = ({ onSubmit }) => {
     handleSubmit,
     setError,
     clearErrors,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitting },
   } = useForm({
     mode: "all",
     defaultValues: {
@@ -35,6 +35,7 @@ const Register = ({ onSubmit }) => {
       <form
         className="auth__form"
         onSubmit={handleSubmit(async (data) => {
+          document.activeElement.blur();
           try {
             await onSubmit(data);
           } catch (e) {
@@ -55,7 +56,7 @@ const Register = ({ onSubmit }) => {
               {...register("name", {
                 onChange: handleChangeWithReset,
                 required: {
-                  value: true,
+                  value: !isSubmitting,
                   message: "Обязательное поле",
                 },
                 minLength: {
@@ -71,6 +72,7 @@ const Register = ({ onSubmit }) => {
               type="text"
               autoComplete="name"
               placeholder="Имя"
+              disabled={isSubmitting}
               errorMessage={errors.name?.message}
             />
 
@@ -78,7 +80,7 @@ const Register = ({ onSubmit }) => {
               {...register("email", {
                 onChange: handleChangeWithReset,
                 required: {
-                  value: true,
+                  value: !isSubmitting,
                   message: "Обязательное поле",
                 },
                 minLength: {
@@ -97,6 +99,7 @@ const Register = ({ onSubmit }) => {
               label="E-mail"
               autoComplete="email"
               placeholder="email@email.com"
+              disabled={isSubmitting}
               errorMessage={errors.email?.message}
             />
 
@@ -104,7 +107,7 @@ const Register = ({ onSubmit }) => {
               {...register("password", {
                 onChange: handleChangeWithReset,
                 required: {
-                  value: true,
+                  value: !isSubmitting,
                   message: "Обязательное поле",
                 },
                 minLength: {
@@ -120,6 +123,7 @@ const Register = ({ onSubmit }) => {
               type="password"
               autoComplete="new-password"
               placeholder="password"
+              disabled={isSubmitting}
               errorMessage={errors.password?.message}
             />
           </div>
@@ -130,7 +134,11 @@ const Register = ({ onSubmit }) => {
             <span className="auth__error">{errors.root.message}</span>
           )}
 
-          <button type="submit" className="auth__button" disabled={!isValid}>
+          <button
+            type="submit"
+            className="auth__button"
+            disabled={!isValid || isSubmitting}
+          >
             Зарегистрироваться
           </button>
 

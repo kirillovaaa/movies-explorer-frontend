@@ -11,7 +11,7 @@ const Login = ({ onSubmit }) => {
     handleSubmit,
     setError,
     clearErrors,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitting },
   } = useForm({
     mode: "all",
     defaultValues: {
@@ -32,6 +32,7 @@ const Login = ({ onSubmit }) => {
       <form
         className="auth__form"
         onSubmit={handleSubmit(async (data) => {
+          document.activeElement.blur();
           try {
             await onSubmit(data);
           } catch (e) {
@@ -52,7 +53,7 @@ const Login = ({ onSubmit }) => {
               {...register("email", {
                 onChange: handleChangeWithReset,
                 required: {
-                  value: true,
+                  value: !isSubmitting,
                   message: "Обязательное поле",
                 },
                 pattern: {
@@ -63,6 +64,7 @@ const Login = ({ onSubmit }) => {
               label="E-mail"
               placeholder="email@email.com"
               autoComplete="email"
+              disabled={isSubmitting}
               errorMessage={errors.email?.message}
             />
 
@@ -70,7 +72,7 @@ const Login = ({ onSubmit }) => {
               {...register("password", {
                 onChange: handleChangeWithReset,
                 required: {
-                  value: true,
+                  value: !isSubmitting,
                   message: "Обязательное поле",
                 },
                 minLength: {
@@ -86,6 +88,7 @@ const Login = ({ onSubmit }) => {
               type="password"
               placeholder="password"
               autoComplete="current-password"
+              disabled={isSubmitting}
               errorMessage={errors.password?.message}
             />
           </div>
@@ -96,7 +99,11 @@ const Login = ({ onSubmit }) => {
             <span className="auth__error">{errors.root.message}</span>
           )}
 
-          <button type="submit" className="auth__button" disabled={!isValid}>
+          <button
+            type="submit"
+            className="auth__button"
+            disabled={!isValid || isSubmitting}
+          >
             Войти
           </button>
 
