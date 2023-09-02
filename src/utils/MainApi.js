@@ -1,11 +1,9 @@
-import filterMovies from "./filterMovies";
 import getResponseData from "./getResponseData";
 
 class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
-    this._cachedMovies = null;
   }
 
   _setToken = (token) => {
@@ -66,23 +64,10 @@ class Api {
     });
   };
 
-  _fetchMovies = async () => {
-    if (!this._cachedMovies) {
-      this._cachedMovies = await getResponseData(`${this._baseUrl}/movies`, {
-        headers: this._headers,
-      });
-    }
-    // TODO: добавить имитацию ожидания, если кеширован
-    return this._cachedMovies;
-  };
-
-  getSavedMovies = async ({ initialize, search, shortMovies }) => {
-    if (initialize) {
-      this._cachedMovies = null;
-    }
-    const movies = await this._fetchMovies();
-    const filtered = filterMovies(movies, { search, shortMovies });
-    return filtered;
+  getSavedMovies = async () => {
+    return await getResponseData(`${this._baseUrl}/movies`, {
+      headers: this._headers,
+    });
   };
 
   addCard = async (card) => {

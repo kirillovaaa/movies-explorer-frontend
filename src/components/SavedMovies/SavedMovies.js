@@ -5,27 +5,25 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 // утилиты
-import MainApi from "../../utils/MainApi";
 import useSavedMovies from "../../utils/useSavedMovies";
 
 const SavedMovies = () => {
   const [search, setSearch] = useState("");
   const [shortMovies, setShortMovies] = useState(false);
-
   const [isLoading, setIsLoading] = useState(false);
 
-  const { savedMovies, setSavedMovies, removeSavedMovie } = useSavedMovies();
+  const {
+    savedMoviesSearchResult,
+    initialize,
+    searchSavedMovies,
+    removeSavedMovie,
+  } = useSavedMovies({ search, shortMovies });
 
   useEffect(() => {
     setIsLoading(true);
-    MainApi.getSavedMovies({ initialize: true, search, shortMovies })
-      .then((movies) => {
-        setSavedMovies(movies);
-      })
+    initialize()
       .catch((e) => {
-        if (e.status === 404) {
-          setSavedMovies(null);
-        }
+        console.log(e);
       })
       .finally(() => {
         setIsLoading(false);
@@ -36,10 +34,8 @@ const SavedMovies = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
-      setSavedMovies([]);
       setIsLoading(true);
-      const result = await MainApi.getSavedMovies({ search, shortMovies });
-      setSavedMovies(result);
+      searchSavedMovies();
     } catch (e) {
       console.log(e);
     } finally {
@@ -68,9 +64,9 @@ const SavedMovies = () => {
 
       {isLoading ? (
         <Preloader />
-      ) : savedMovies ? (
+      ) : savedMoviesSearchResult ? (
         <MoviesCardList
-          movies={savedMovies}
+          movies={savedMoviesSearchResult}
           onlyRemove={true}
           onCardRemove={removeSavedMovie}
         />
