@@ -76,6 +76,7 @@ const App = () => {
     setIsLoggedIn(false);
     setCurrentUser(defaultUser);
     localStorage.removeItem("recentSearch");
+    localStorage.removeItem("savedMovies");
     navigate("/");
   };
 
