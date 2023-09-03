@@ -9,7 +9,7 @@ const breakpoints = {
   },
   l: {
     initial: 16,
-    page: 2,
+    page: 4,
   },
 };
 
