@@ -3,6 +3,7 @@ import "./MoviesCardList.css";
 // компоненты
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
+import textLabels from "../../constants/textLabels";
 
 const MoviesCardList = ({
   movies,
@@ -17,7 +18,7 @@ const MoviesCardList = ({
   if (movies.length === 0) {
     return (
       <span className="movies__card-list-empty">
-        По вашему запросу фильмов нет
+        {textLabels.moviesCardList.emptyMessage}
       </span>
     );
   }
@@ -49,7 +50,7 @@ const MoviesCardList = ({
             className="movies__more-button"
             onClick={onClickMore}
           >
-            Ещё
+            {textLabels.moviesCardList.actions.more}
           </button>
         ))}
     </>

@@ -4,6 +4,7 @@ import SideNav from "../SideNav/SideNav";
 import logo from "../../images/logo.svg";
 import menuIcon from "../../images/menu.svg";
 import "./Header.css";
+import textLabels from "../../constants/textLabels";
 
 const HeaderTab = ({ to, children, onClick }) => {
   return (
@@ -52,8 +53,13 @@ const Header = ({ isLoggedIn }) => {
 
           {isLoggedIn && (
             <div className="header__tabs">
-              <HeaderTab to="/movies">Фильмы</HeaderTab>
-              <HeaderTab to="/saved-movies">Сохраненные фильмы</HeaderTab>
+              <HeaderTab to="/movies">
+                {textLabels.header.tabs.movies}
+              </HeaderTab>
+
+              <HeaderTab to="/saved-movies">
+                {textLabels.header.tabs.savedMovies}
+              </HeaderTab>
             </div>
           )}
 
@@ -61,7 +67,7 @@ const Header = ({ isLoggedIn }) => {
             {isLoggedIn ? (
               <>
                 <Link to="/profile" className="header__profile-button">
-                  Аккаунт
+                  {textLabels.header.links.profile}
                 </Link>
 
                 <button
@@ -74,15 +80,15 @@ const Header = ({ isLoggedIn }) => {
               </>
             ) : (
               <>
-                <Link to="signup" className="header__auth-button">
-                  Регистрация
+                <Link to="/signup" className="header__auth-button">
+                  {textLabels.header.links.signup}
                 </Link>
 
                 <Link
-                  to="signin"
+                  to="/signin"
                   className="header__auth-button header__auth-button_primary"
                 >
-                  Войти
+                  {textLabels.header.links.signin}
                 </Link>
               </>
             )}

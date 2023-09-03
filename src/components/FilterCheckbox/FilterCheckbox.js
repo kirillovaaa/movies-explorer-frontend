@@ -1,5 +1,6 @@
 import React from "react";
 import "./FilterCheckbox.css";
+import textLabels from "../../constants/textLabels";
 
 const FilterCheckbox = ({ value, onCheck }) => {
   return (
@@ -14,7 +15,9 @@ const FilterCheckbox = ({ value, onCheck }) => {
         onClick={onCheck}
       ></button>
 
-      <span className="search-form__toggle-text">Короткометражки</span>
+      <span className="search-form__toggle-text">
+        {textLabels.searchForm.shortMovies}
+      </span>
     </div>
   );
 };

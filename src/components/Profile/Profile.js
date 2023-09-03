@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./Profile.css";
+import fieldLabels from "../../constants/fieldLabels";
+import textLabels from "../../constants/textLabels";
 
 const Profile = ({ onSubmit, onLogout }) => {
   const currentUser = useContext(CurrentUserContext);
@@ -30,7 +32,7 @@ const Profile = ({ onSubmit, onLogout }) => {
   const checkValidity = () => {
     const { name, email } = getValues();
     if (name === currentUser.name && email === currentUser.email) {
-      setError("root", { message: "Форма не заполнена" });
+      setError("root", { message: fieldLabels.validationMessages.formEmpty });
     } else {
       clearErrors("root");
     }
@@ -57,62 +59,64 @@ const Profile = ({ onSubmit, onLogout }) => {
             await onSubmit(data);
           } catch (e) {
             setError("response", {
-              message: "При обновлении профиля произошла ошибка",
+              message: textLabels.profile.messages.error,
             });
           }
         })}
       >
         <section className="profile__top">
-          <h1 className="profile__welcome">Привет, {currentUser.name}!</h1>
+          <h1 className="profile__welcome">
+            {textLabels.profile.welcome(currentUser.name)}
+          </h1>
 
           <div className="profile__container">
             <div className="profile__field">
-              <span>Имя</span>
+              <span>{fieldLabels.name.label}</span>
               <input
                 {...register("name", {
                   onChange: handleChangeWithReset,
                   required: {
                     value: !isSubmitting,
-                    message: "Обязательное поле",
+                    message: fieldLabels.validationMessages.required,
                   },
                   minLength: {
                     value: 2,
-                    message: "Минимальная длина 2 символа",
+                    message: fieldLabels.validationMessages.minLength(2),
                   },
                   maxLength: {
                     value: 30,
-                    message: "Минимальная длина 30 символов",
+                    message: fieldLabels.validationMessages.maxLength(30),
                   },
                 })}
+                placeholder={fieldLabels.name.placeholder}
                 className="profile__field-input"
                 type="text"
                 disabled={isSubmitting}
                 autoComplete="name"
-                placeholder="Имя"
               />
             </div>
 
             <div className="profile__field-divider"></div>
 
             <div className="profile__field">
-              <span>E-mail</span>
+              <span>{fieldLabels.email.label}</span>
               <input
                 {...register("email", {
                   onChange: handleChangeWithReset,
                   required: {
                     value: !isSubmitting,
-                    message: "Обязательное поле",
+                    message: fieldLabels.validationMessages.required,
                   },
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Укажите валидный e-mail адрес",
+                    message: fieldLabels.validationMessages.email,
                   },
                 })}
+                placeholder={fieldLabels.email.placeholder}
                 className="profile__field-input"
                 type="text"
                 disabled={isSubmitting}
                 autoComplete="email"
-                placeholder="email@email.com"
               />
             </div>
           </div>
@@ -121,16 +125,18 @@ const Profile = ({ onSubmit, onLogout }) => {
         <div className="profile__buttons">
           <div className="profile__messages-wrapper">
             {isSubmitSuccessful && (
-              <span className="profile__message">Данные успешно обновлены</span>
+              <span className="profile__message">
+                {textLabels.profile.messages.success}
+              </span>
             )}
             {errors.name?.message && (
               <span className="profile__message profile__message_error">
-                Имя: {errors.name.message}
+                {fieldLabels.name.label}: {errors.name.message}
               </span>
             )}
             {errors.email?.message && (
               <span className="profile__message profile__message_error">
-                Email: {errors.email.message}
+                {fieldLabels.email.label}: {errors.email.message}
               </span>
             )}
             {errors.response?.message && (
@@ -151,7 +157,7 @@ const Profile = ({ onSubmit, onLogout }) => {
               isSubmitting
             }
           >
-            Редактировать
+            {textLabels.profile.actions.submit}
           </button>
 
           <button
@@ -159,7 +165,7 @@ const Profile = ({ onSubmit, onLogout }) => {
             className="profile__button profile__button_destructive"
             onClick={onLogout}
           >
-            Выйти из аккаунта
+            {textLabels.profile.actions.logout}
           </button>
         </div>
       </form>

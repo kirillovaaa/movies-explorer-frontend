@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import "./Register.css";
 import Field from "../Field/Field";
 import logo from "../../images/logo.svg";
+import fieldLabels from "../../constants/fieldLabels";
+import textLabels from "../../constants/textLabels";
 
 const Register = ({ onSubmit }) => {
   const {
@@ -48,7 +50,7 @@ const Register = ({ onSubmit }) => {
             <Link to="/">
               <img src={logo} className="auth__logo" alt="Логотип" />
             </Link>
-            <h1 className="auth__title">Добро пожаловать!</h1>
+            <h1 className="auth__title">{textLabels.auth.register.title}</h1>
           </div>
 
           <div className="auth__fields">
@@ -57,21 +59,21 @@ const Register = ({ onSubmit }) => {
                 onChange: handleChangeWithReset,
                 required: {
                   value: !isSubmitting,
-                  message: "Обязательное поле",
+                  message: fieldLabels.validationMessages.required,
                 },
                 minLength: {
                   value: 2,
-                  message: "Минимальная длина 2 символа",
+                  message: fieldLabels.validationMessages.minLength(2),
                 },
                 maxLength: {
                   value: 30,
-                  message: "Минимальная длина 30 символов",
+                  message: fieldLabels.validationMessages.maxLength(30),
                 },
               })}
-              label="Имя"
+              label={fieldLabels.name.label}
+              placeholder={fieldLabels.name.placeholder}
               type="text"
               autoComplete="name"
-              placeholder="Имя"
               disabled={isSubmitting}
               errorMessage={errors.name?.message}
             />
@@ -81,24 +83,24 @@ const Register = ({ onSubmit }) => {
                 onChange: handleChangeWithReset,
                 required: {
                   value: !isSubmitting,
-                  message: "Обязательное поле",
+                  message: fieldLabels.validationMessages.required,
                 },
                 minLength: {
                   value: 8,
-                  message: "Минимальная длина 8 символов",
+                  message: fieldLabels.validationMessages.minLength(8),
                 },
                 maxLength: {
                   value: 30,
-                  message: "Максимальная длина 30 символов",
+                  message: fieldLabels.validationMessages.maxLength(30),
                 },
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Укажите валидный e-mail адрес",
+                  message: fieldLabels.validationMessages.email,
                 },
               })}
-              label="E-mail"
+              label={fieldLabels.email.label}
+              placeholder={fieldLabels.email.placeholder}
               autoComplete="email"
-              placeholder="email@email.com"
               disabled={isSubmitting}
               errorMessage={errors.email?.message}
             />
@@ -108,21 +110,21 @@ const Register = ({ onSubmit }) => {
                 onChange: handleChangeWithReset,
                 required: {
                   value: !isSubmitting,
-                  message: "Обязательное поле",
+                  message: fieldLabels.validationMessages.required,
                 },
                 minLength: {
                   value: 8,
-                  message: "Минимальная длина 8 символов",
+                  message: fieldLabels.validationMessages.minLength(8),
                 },
                 maxLength: {
                   value: 16,
-                  message: "Максимальная длина 16 символов",
+                  message: fieldLabels.validationMessages.maxLength(16),
                 },
               })}
-              label="Пароль"
+              label={fieldLabels.password.label}
+              placeholder={fieldLabels.password.placeholder}
               type="password"
               autoComplete="new-password"
-              placeholder="password"
               disabled={isSubmitting}
               errorMessage={errors.password?.message}
             />
@@ -139,13 +141,13 @@ const Register = ({ onSubmit }) => {
             className="auth__button"
             disabled={!isValid || isSubmitting}
           >
-            Зарегистрироваться
+            {textLabels.auth.register.actions.signup}
           </button>
 
           <span className="auth__question">
-            Уже зарегистрированы?{" "}
+            {textLabels.auth.register.question}{" "}
             <Link to="/signin" className="auth__secondary-link">
-              Войти
+              {textLabels.auth.register.actions.signin}
             </Link>
           </span>
         </div>

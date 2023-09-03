@@ -1,25 +1,21 @@
 import React from "react";
 import "./Techs.css";
+import textLabels from "../../../constants/textLabels";
 
 const Techs = () => {
   return (
     <section className="techs" id="techs">
-      <h2 className="section-header">Технологии</h2>
-      <h3 className="techs__title">7 технологий</h3>
+      <h2 className="section-header">{textLabels.main.techs.header}</h2>
+      <h3 className="techs__title">{textLabels.main.techs.title}</h3>
 
-      <p className="techs__subtitle">
-        На курсе веб-разработки мы освоили технологии, которые применили в
-        дипломном проекте.
-      </p>
+      <p className="techs__subtitle">{textLabels.main.techs.subtitle}</p>
 
       <ul className="techs__items">
-        <li className="techs__item">HTML</li>
-        <li className="techs__item">CSS</li>
-        <li className="techs__item">JS</li>
-        <li className="techs__item">React</li>
-        <li className="techs__item">Git</li>
-        <li className="techs__item">Express.js</li>
-        <li className="techs__item">mongoDB</li>
+        {textLabels.main.techs.items.map((item) => (
+          <li key={item.id} className="techs__item">
+            {item.value}
+          </li>
+        ))}
       </ul>
     </section>
   );

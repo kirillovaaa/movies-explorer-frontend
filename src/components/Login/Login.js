@@ -4,6 +4,8 @@ import "./Login.css";
 import Field from "../Field/Field";
 import { useForm } from "react-hook-form";
 import logo from "../../images/logo.svg";
+import textLabels from "../../constants/textLabels";
+import fieldLabels from "../../constants/fieldLabels";
 
 const Login = ({ onSubmit }) => {
   const {
@@ -45,7 +47,7 @@ const Login = ({ onSubmit }) => {
             <Link to="/">
               <img src={logo} className="auth__logo" alt="Логотип" />
             </Link>
-            <h1 className="auth__title">Рады видеть!</h1>
+            <h1 className="auth__title">{textLabels.auth.login.title}</h1>
           </div>
 
           <div className="auth__fields">
@@ -54,15 +56,15 @@ const Login = ({ onSubmit }) => {
                 onChange: handleChangeWithReset,
                 required: {
                   value: !isSubmitting,
-                  message: "Обязательное поле",
+                  message: fieldLabels.validationMessages.required,
                 },
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Укажите валидный e-mail адрес",
+                  message: fieldLabels.validationMessages.email,
                 },
               })}
-              label="E-mail"
-              placeholder="email@email.com"
+              label={fieldLabels.email.label}
+              placeholder={fieldLabels.email.placeholder}
               autoComplete="email"
               disabled={isSubmitting}
               errorMessage={errors.email?.message}
@@ -73,20 +75,20 @@ const Login = ({ onSubmit }) => {
                 onChange: handleChangeWithReset,
                 required: {
                   value: !isSubmitting,
-                  message: "Обязательное поле",
+                  message: fieldLabels.validationMessages.required,
                 },
                 minLength: {
                   value: 8,
-                  message: "Минимальная длина 8 символов",
+                  message: fieldLabels.validationMessages.minLength(8),
                 },
                 maxLength: {
                   value: 16,
-                  message: "Максимальная длина 16 символов",
+                  message: fieldLabels.validationMessages.maxLength(16),
                 },
               })}
-              label="Пароль"
+              label={fieldLabels.password.label}
+              placeholder={fieldLabels.password.placeholder}
               type="password"
-              placeholder="password"
               autoComplete="current-password"
               disabled={isSubmitting}
               errorMessage={errors.password?.message}
@@ -104,13 +106,13 @@ const Login = ({ onSubmit }) => {
             className="auth__button"
             disabled={!isValid || isSubmitting}
           >
-            Войти
+            {textLabels.auth.login.actions.signin}
           </button>
 
           <span className="auth__question">
-            Ещё не зарегистрированы?{" "}
+            {textLabels.auth.login.question}{" "}
             <Link to="/signup" className="auth__secondary-link">
-              Регистрация
+              {textLabels.auth.login.actions.signup}
             </Link>
           </span>
         </div>

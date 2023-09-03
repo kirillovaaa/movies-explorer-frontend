@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import breakpoints from "../constants/breakpoints";
 
 const usePageAmount = () => {
   const [initialAmount, setInitialAmount] = useState(0);
@@ -7,16 +8,16 @@ const usePageAmount = () => {
   let throttleResize = useRef(null);
 
   const calculateAmounts = () => {
-    let initialAmount = 16;
-    let nextPageAmount = 4;
+    let initialAmount = breakpoints.l.initial;
+    let nextPageAmount = breakpoints.l.page;
 
     if (window.innerWidth <= 1280) {
-      initialAmount = 8;
-      nextPageAmount = 2;
+      initialAmount = breakpoints.m.initial;
+      nextPageAmount = breakpoints.m.initial;
     }
     if (window.innerWidth <= 480) {
-      initialAmount = 5;
-      nextPageAmount = 2;
+      initialAmount = breakpoints.s.initial;
+      nextPageAmount = breakpoints.s.page;
     }
 
     setInitialAmount(initialAmount);

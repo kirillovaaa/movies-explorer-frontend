@@ -2,6 +2,7 @@ import React from "react";
 import iconSearch from "../../images/icon-search.svg";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
+import textLabels from "../../constants/textLabels";
 
 const SearchForm = ({
   search,
@@ -19,7 +20,7 @@ const SearchForm = ({
           onChange={onChangeSearch}
           className="search-form__input"
           name="search"
-          placeholder="Фильм"
+          placeholder={textLabels.searchForm.searchField}
           required={isSearchRequired}
         />
 
