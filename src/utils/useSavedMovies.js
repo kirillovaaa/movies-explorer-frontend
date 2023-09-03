@@ -1,18 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import SavedMoviesContext from "../contexts/SavedMoviesContext";
-import CurrentUserContext from "../contexts/CurrentUserContext";
 import MainApi from "./MainApi";
 import filterMovies from "./filterMovies";
 
 const useSavedMovies = (
   { search, shortMovies } = { search: "", shortMovies: false }
 ) => {
-  const { _id } = useContext(CurrentUserContext);
   const [savedMovies, setSavedMovies] = useContext(SavedMoviesContext);
   const [savedMoviesSearchResult, setSavedMoviesSearchResult] = useState(null);
 
   useEffect(() => {
-    const localMovies = localStorage.getItem(`savedMovies-${_id}`);
+    const localMovies = localStorage.getItem(`savedMovies`);
     if (localMovies) {
       setSavedMovies(JSON.parse(localMovies));
       setSavedMoviesSearchResult(
@@ -23,7 +21,7 @@ const useSavedMovies = (
   }, []);
 
   const updateSavedMoviesState = (data) => {
-    localStorage.setItem(`savedMovies-${_id}`, JSON.stringify(data));
+    localStorage.setItem(`savedMovies`, JSON.stringify(data));
     setSavedMovies(data);
     setSavedMoviesSearchResult(filterMovies(data, { search, shortMovies }));
   };

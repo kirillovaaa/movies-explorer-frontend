@@ -17,7 +17,8 @@ const Movies = () => {
   const [totalLength, setTotalLength] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { savedMovies, addSavedMovie, removeSavedMovie } = useSavedMovies();
+  const { savedMovies, initialize, addSavedMovie, removeSavedMovie } =
+    useSavedMovies();
 
   const { initialAmount, nextPageAmount } = usePageAmount();
 
@@ -30,6 +31,17 @@ const Movies = () => {
       setMovies(json.movies);
       setTotalLength(json.totalLength);
     }
+    if (!savedMovies) {
+      setIsLoading(true);
+      initialize()
+        .catch((e) => {
+          console.log(e);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateLocalStorage = ({ search, shortMovies, movies, totalLength }) => {
