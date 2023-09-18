@@ -1,23 +1,22 @@
 import React from "react";
 import { useMatch } from "react-router-dom";
 import "./Footer.css";
+import textLabels from "../../constants/textLabels";
 
 const Footer = () => {
   const matchMain = useMatch("/");
   const matchMovies = useMatch("/movies");
   const matchSavedMovies = useMatch("/saved-movies");
 
-  const showFooter = matchMain || matchMovies || matchSavedMovies;
+  const matchRoutes = matchMain || matchMovies || matchSavedMovies;
 
-  if (!showFooter) {
+  if (!matchRoutes) {
     return null;
   }
 
   return (
     <footer className="footer">
-      <p className="footer__description">
-        Учебный проект Яндекс.Практикум х BeatFilm.
-      </p>
+      <p className="footer__description">{textLabels.footer.description}</p>
 
       <div className="footer__info">
         <ul className="footer__links">
@@ -27,7 +26,7 @@ const Footer = () => {
               href="https://practicum.yandex.ru/"
               target="blank"
             >
-              Яндекс.Практикум
+              {textLabels.footer.links.practicum}
             </a>
           </li>
 
@@ -37,12 +36,12 @@ const Footer = () => {
               href="https://github.com/kirillovaaa"
               target="blank"
             >
-              Github
+              {textLabels.footer.links.github}
             </a>
           </li>
         </ul>
 
-        <span className="footer__copyright">© 2023</span>
+        <span className="footer__copyright">{textLabels.footer.copyright}</span>
       </div>
     </footer>
   );

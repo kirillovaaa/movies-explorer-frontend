@@ -1,17 +1,27 @@
 import React from "react";
 import iconSearch from "../../images/icon-search.svg";
+import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
+import textLabels from "../../constants/textLabels";
 
-const SearchForm = () => {
+const SearchForm = ({
+  search,
+  isSearchRequired = true,
+  shortMovies,
+  onChangeSearch,
+  onToggleShort,
+  onSubmit,
+}) => {
   return (
-    <form className="search-form">
+    <form className="search-form" onSubmit={onSubmit}>
       <div className="search-form__input-wrapper">
         <input
+          value={search}
+          onChange={onChangeSearch}
           className="search-form__input"
-          type="text"
-          name="password"
-          placeholder="Фильм"
-          required={true}
+          name="search"
+          placeholder={textLabels.searchForm.searchField}
+          required={isSearchRequired}
         />
 
         <button type="submit" className="search-form__button-search">
@@ -23,10 +33,10 @@ const SearchForm = () => {
         </button>
       </div>
 
-      <div className="search-form__toggle-wrapper">
-        <button type="button" className="search-form__button-switch"></button>
-        <span className="search-form__toggle-text">Короткометражки</span>
-      </div>
+      <FilterCheckbox
+        value={shortMovies}
+        onCheck={() => onToggleShort(!shortMovies)}
+      />
     </form>
   );
 };

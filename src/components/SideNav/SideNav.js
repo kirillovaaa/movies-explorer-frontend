@@ -2,6 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import crossIcon from "../../images/cross.svg";
 import "./SideNav.css";
+import textLabels from "../../constants/textLabels";
 
 const SideNavLink = ({ to, children, onClick }) => {
   return (
@@ -38,21 +39,15 @@ const SideNav = ({ isMenuOpen, onCloseMenu }) => {
         </button>
 
         <div className="sidenav__tabs" onClick={handleCaptureSidenav}>
-          <SideNavLink to="/" onClick={onCloseMenu}>
-            Главная
-          </SideNavLink>
-
-          <SideNavLink to="/movies" onClick={onCloseMenu}>
-            Фильмы
-          </SideNavLink>
-
-          <SideNavLink to="/saved-movies" onClick={onCloseMenu}>
-            Сохраненные фильмы
-          </SideNavLink>
+          {textLabels.sideNav.tabs.map((t) => (
+            <SideNavLink key={t.link} to={t.link} onClick={onCloseMenu}>
+              {t.label}
+            </SideNavLink>
+          ))}
         </div>
 
         <Link to="/profile" className="sidenav__profile-button">
-          Аккаунт
+          {textLabels.sideNav.links.account}
         </Link>
       </div>
     </aside>

@@ -1,76 +1,171 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./Profile.css";
+import fieldLabels from "../../constants/fieldLabels";
+import textLabels from "../../constants/textLabels";
 
-const Profile = () => {
-  const [userName, setUserName] = useState("Александра");
-  const [userEmail, setUserEmail] = useState("email@email.com");
+const Profile = ({ onSubmit, onLogout }) => {
+  const currentUser = useContext(CurrentUserContext);
 
-  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    clearErrors,
+    getValues,
+    reset,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+  } = useForm({
+    mode: "all",
+    defaultValues: {
+      name: currentUser.name,
+      email: currentUser.email,
+    },
+  });
 
-  const handleClickLogout = () => {
-    navigate("/signin");
+  useEffect(() => {
+    checkValidity();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser]);
+
+  const checkValidity = () => {
+    const { name, email } = getValues();
+    if (name === currentUser.name && email === currentUser.email) {
+      setError("root", { message: fieldLabels.validationMessages.formEmpty });
+    } else {
+      clearErrors("root");
+    }
   };
 
-  const handleChangeName = (e) => {
-    setUserName(e.target.value);
-  };
-
-  const handleChangeEmail = (e) => {
-    setUserEmail(e.target.value);
+  const handleChangeWithReset = (e) => {
+    if (isSubmitSuccessful) {
+      reset({}, { keepValues: true });
+    }
+    if (errors.response) {
+      clearErrors("response");
+    }
+    checkValidity();
+    return e.target.value;
   };
 
   return (
     <main className="profile">
-      <form className="profile__form">
+      <form
+        className="profile__form"
+        onSubmit={handleSubmit(async (data) => {
+          document.activeElement.blur();
+          try {
+            await onSubmit(data);
+          } catch (e) {
+            setError("response", {
+              message: textLabels.profile.messages.error,
+            });
+          }
+        })}
+      >
         <section className="profile__top">
-          <h1 className="profile__welcome">Привет, Александра!</h1>
+          <h1 className="profile__welcome">
+            {textLabels.profile.welcome(currentUser.name)}
+          </h1>
 
           <div className="profile__container">
             <div className="profile__field">
-              <span>Имя</span>
+              <span>{fieldLabels.name.label}</span>
               <input
+                {...register("name", {
+                  onChange: handleChangeWithReset,
+                  required: {
+                    value: !isSubmitting,
+                    message: fieldLabels.validationMessages.required,
+                  },
+                  minLength: {
+                    value: 2,
+                    message: fieldLabels.validationMessages.minLength(2),
+                  },
+                  maxLength: {
+                    value: 30,
+                    message: fieldLabels.validationMessages.maxLength(30),
+                  },
+                })}
+                placeholder={fieldLabels.name.placeholder}
                 className="profile__field-input"
                 type="text"
-                name="name"
-                autoComplete="email"
-                placeholder="Имя"
-                minLength={2}
-                maxLength={30}
-                value={userName}
-                onChange={handleChangeName}
+                disabled={isSubmitting}
+                autoComplete="name"
               />
             </div>
 
             <div className="profile__field-divider"></div>
 
             <div className="profile__field">
-              <span>E-mail</span>
+              <span>{fieldLabels.email.label}</span>
               <input
+                {...register("email", {
+                  onChange: handleChangeWithReset,
+                  required: {
+                    value: !isSubmitting,
+                    message: fieldLabels.validationMessages.required,
+                  },
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: fieldLabels.validationMessages.email,
+                  },
+                })}
+                placeholder={fieldLabels.email.placeholder}
                 className="profile__field-input"
                 type="text"
-                name="email"
-                autoComplete="name"
-                placeholder="email@email.com"
-                minLength={8}
-                value={userEmail}
-                onChange={handleChangeEmail}
+                disabled={isSubmitting}
+                autoComplete="email"
               />
             </div>
           </div>
         </section>
 
         <div className="profile__buttons">
-          <button type="submit" className="profile__button">
-            Редактировать
+          <div className="profile__messages-wrapper">
+            {isSubmitSuccessful && (
+              <span className="profile__message">
+                {textLabels.profile.messages.success}
+              </span>
+            )}
+            {errors.name?.message && (
+              <span className="profile__message profile__message_error">
+                {fieldLabels.name.label}: {errors.name.message}
+              </span>
+            )}
+            {errors.email?.message && (
+              <span className="profile__message profile__message_error">
+                {fieldLabels.email.label}: {errors.email.message}
+              </span>
+            )}
+            {errors.response?.message && (
+              <span className="profile__message profile__message_error">
+                {errors.response.message}
+              </span>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            className="profile__button"
+            disabled={
+              errors.email ||
+              errors.name ||
+              errors.root ||
+              errors.response ||
+              isSubmitting
+            }
+          >
+            {textLabels.profile.actions.submit}
           </button>
 
           <button
             type="button"
             className="profile__button profile__button_destructive"
-            onClick={handleClickLogout}
+            onClick={onLogout}
           >
-            Выйти из аккаунта
+            {textLabels.profile.actions.logout}
           </button>
         </div>
       </form>

@@ -1,96 +1,153 @@
-import React, { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 // все нужные нам стили уже есть в другом компоненте -> Signin
 // здесь только перегрузка для маргина нижнего блока
 import "./Register.css";
-import logo from "../../images/logo.svg";
 import Field from "../Field/Field";
+import logo from "../../images/logo.svg";
+import fieldLabels from "../../constants/fieldLabels";
+import textLabels from "../../constants/textLabels";
 
 const Register = ({ onSubmit }) => {
-  const [name, setName] = useState("Александра");
-  const [email, setEmail] = useState("pochta@yandex.ru");
-  const [password, setPassword] = useState("••••••••••••••");
+  const {
+    register,
+    handleSubmit,
+    setError,
+    clearErrors,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm({
+    mode: "all",
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+  });
 
-  const handleChangeName = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    // отменяем стандартный переход на адрес формы
-    e.preventDefault();
-    // вызываем обработчик нажатия на кнопку "Войти"
-    onSubmit({ email, password });
+  const handleChangeWithReset = (e) => {
+    if (errors.root) {
+      clearErrors("root");
+    }
+    return e.target.value;
   };
 
   return (
     <main className="auth">
-      <form className="auth__form" onSubmit={handleSubmit}>
+      <form
+        className="auth__form"
+        onSubmit={handleSubmit(async (data) => {
+          document.activeElement.blur();
+          try {
+            await onSubmit(data);
+          } catch (e) {
+            setError("root", { message: e.message });
+          }
+        })}
+      >
         <section className="auth__top auth__top_signup">
           <div className="auth__header">
             <Link to="/">
               <img src={logo} className="auth__logo" alt="Логотип" />
             </Link>
-            <h1 className="auth__title">Добро пожаловать!</h1>
+            <h1 className="auth__title">{textLabels.auth.register.title}</h1>
           </div>
 
           <div className="auth__fields">
             <Field
-              label="Имя"
-              value={name}
-              onChange={handleChangeName}
+              {...register("name", {
+                onChange: handleChangeWithReset,
+                required: {
+                  value: !isSubmitting,
+                  message: fieldLabels.validationMessages.required,
+                },
+                minLength: {
+                  value: 2,
+                  message: fieldLabels.validationMessages.minLength(2),
+                },
+                maxLength: {
+                  value: 30,
+                  message: fieldLabels.validationMessages.maxLength(30),
+                },
+              })}
+              label={fieldLabels.name.label}
+              placeholder={fieldLabels.name.placeholder}
               type="text"
               autoComplete="name"
-              name="name"
-              minLength="2"
-              maxLength="30"
-              placeholder="Александра"
-              required={true}
+              disabled={isSubmitting}
+              errorMessage={errors.name?.message}
             />
 
             <Field
-              label="E-mail"
-              value={email}
-              onChange={handleChangeEmail}
-              type="email"
+              {...register("email", {
+                onChange: handleChangeWithReset,
+                required: {
+                  value: !isSubmitting,
+                  message: fieldLabels.validationMessages.required,
+                },
+                minLength: {
+                  value: 8,
+                  message: fieldLabels.validationMessages.minLength(8),
+                },
+                maxLength: {
+                  value: 30,
+                  message: fieldLabels.validationMessages.maxLength(30),
+                },
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: fieldLabels.validationMessages.email,
+                },
+              })}
+              label={fieldLabels.email.label}
+              placeholder={fieldLabels.email.placeholder}
               autoComplete="email"
-              placeholder="email@email.com"
-              name="email"
-              required={true}
+              disabled={isSubmitting}
+              errorMessage={errors.email?.message}
             />
 
             <Field
-              label="Пароль"
-              value={password}
-              onChange={handleChangePassword}
+              {...register("password", {
+                onChange: handleChangeWithReset,
+                required: {
+                  value: !isSubmitting,
+                  message: fieldLabels.validationMessages.required,
+                },
+                minLength: {
+                  value: 8,
+                  message: fieldLabels.validationMessages.minLength(8),
+                },
+                maxLength: {
+                  value: 16,
+                  message: fieldLabels.validationMessages.maxLength(16),
+                },
+              })}
+              label={fieldLabels.password.label}
+              placeholder={fieldLabels.password.placeholder}
               type="password"
               autoComplete="new-password"
-              name="password"
-              minLength="2"
-              maxLength="30"
-              placeholder="password"
-              errorMessage="Что-то пошло не так..."
-              required={true}
+              disabled={isSubmitting}
+              errorMessage={errors.password?.message}
             />
           </div>
         </section>
 
         <div className="auth__footer">
-          <button type="submit" className="auth__button">
-            Зарегистрироваться
+          {errors.root && (
+            <span className="auth__error">{errors.root.message}</span>
+          )}
+
+          <button
+            type="submit"
+            className="auth__button"
+            disabled={!isValid || isSubmitting}
+          >
+            {textLabels.auth.register.actions.signup}
           </button>
 
           <span className="auth__question">
-            Уже зарегистрированы?{" "}
+            {textLabels.auth.register.question}{" "}
             <Link to="/signin" className="auth__secondary-link">
-              Войти
+              {textLabels.auth.register.actions.signin}
             </Link>
           </span>
         </div>

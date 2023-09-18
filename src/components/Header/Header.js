@@ -4,6 +4,7 @@ import SideNav from "../SideNav/SideNav";
 import logo from "../../images/logo.svg";
 import menuIcon from "../../images/menu.svg";
 import "./Header.css";
+import textLabels from "../../constants/textLabels";
 
 const HeaderTab = ({ to, children, onClick }) => {
   return (
@@ -35,35 +36,38 @@ const Header = ({ isLoggedIn }) => {
     setIsMenuOpen(false);
   };
 
-  const showHeader =
+  const matchRoutes =
     matchMain || matchMovies || matchSavedMovies || matchProfile;
 
-  if (!showHeader) {
+  if (!matchRoutes) {
     return null;
   }
 
   return (
     <>
       <header className={matchMain ? "header header_blue" : "header"}>
-        <nav className="header-nav">
-          {/* впоследствии заменить на isLoggedIn */}
+        <nav className="header__nav">
           <Link to="/">
             <img src={logo} className="header__logo" alt="Логотип" />
           </Link>
 
-          {/* впоследствии заменить на isLoggedIn */}
-          {!matchMain && (
+          {isLoggedIn && (
             <div className="header__tabs">
-              <HeaderTab to="/movies">Фильмы</HeaderTab>
-              <HeaderTab to="/saved-movies">Сохраненные фильмы</HeaderTab>
+              <HeaderTab to="/movies">
+                {textLabels.header.tabs.movies}
+              </HeaderTab>
+
+              <HeaderTab to="/saved-movies">
+                {textLabels.header.tabs.savedMovies}
+              </HeaderTab>
             </div>
           )}
 
           <div className="header__right">
-            {!matchMain ? (
+            {isLoggedIn ? (
               <>
                 <Link to="/profile" className="header__profile-button">
-                  Аккаунт
+                  {textLabels.header.links.profile}
                 </Link>
 
                 <button
@@ -76,15 +80,15 @@ const Header = ({ isLoggedIn }) => {
               </>
             ) : (
               <>
-                <Link to="signup" className="header__auth-button">
-                  Регистрация
+                <Link to="/signup" className="header__auth-button">
+                  {textLabels.header.links.signup}
                 </Link>
 
                 <Link
-                  to="signin"
+                  to="/signin"
                   className="header__auth-button header__auth-button_primary"
                 >
-                  Войти
+                  {textLabels.header.links.signin}
                 </Link>
               </>
             )}

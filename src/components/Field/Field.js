@@ -1,9 +1,9 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import "./Field.css";
 
-const Field = ({ label, errorMessage, ...props }) => {
+const Field = forwardRef(({ label, errorMessage, ...props }, ref) => {
   return (
-    <div className="auth__input-wrapper">
+    <div ref={ref} className="auth__input-wrapper">
       <span className="auth__input-label">{label}</span>
 
       <input
@@ -18,6 +18,6 @@ const Field = ({ label, errorMessage, ...props }) => {
       ) : null}
     </div>
   );
-};
+});
 
 export default Field;

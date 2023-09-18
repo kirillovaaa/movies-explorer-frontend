@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Page404.css";
+import textLabels from "../../constants/textLabels";
 
 const Page404 = () => {
   const navigate = useNavigate();
@@ -12,8 +13,8 @@ const Page404 = () => {
   return (
     <main className="page-error">
       <section>
-        <h1 className="page-error__title">404</h1>
-        <p className="page-error__subtitle">Страница не найдена</p>
+        <h1 className="page-error__title">{textLabels.page404.title}</h1>
+        <p className="page-error__subtitle">{textLabels.page404.subtitle}</p>
       </section>
 
       <button
@@ -21,7 +22,7 @@ const Page404 = () => {
         className="page-error__back-button"
         onClick={handleClickBack}
       >
-        Назад
+        {textLabels.page404.actions.back}
       </button>
     </main>
   );
